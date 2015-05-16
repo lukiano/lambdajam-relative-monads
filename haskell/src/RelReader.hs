@@ -4,10 +4,8 @@ module RelReader where
 import RelMonad
 import Control.Monad.Reader
 
-class Monad m => MonadReader2 r m | m -> r where
-  ask :: m r
-  local :: (r -> r) -> m a -> m a
-
 rAsk :: (RelMonad (Reader a) r) => r a
-rAsk = undefined
+rAsk = retRel ask
 
+rLocal :: (RelMonad (Reader a) r) => (a -> a) -> r b -> r b 
+rLocal f = rMap (fmap f)

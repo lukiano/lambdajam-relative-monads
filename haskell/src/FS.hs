@@ -1,3 +1,5 @@
+{-# LANGUAGE MultiParamTypeClasses, FlexibleContexts, TypeSynonymInstances, FlexibleInstances #-}
+
 module FS where
 import           System.Directory
 import           Control.Exception (SomeException, catch)
@@ -5,6 +7,8 @@ import           Control.Applicative
 import           Control.Monad.Reader
 import           Result (Result(..), success, failure, result)
 import qualified Result as R
+import           RelMonad
+import           RelResult
 
 data FS a = FS { runFS :: FilePath -> IO (Result a) }
 
@@ -58,3 +62,22 @@ listFiles = FS $ \cwd -> catch (success <$> getDirectoryContents cwd) handleResu
 
 handleResult :: SomeException -> IO (Result a)
 handleResult _ = return (failure "failed")
+
+instance RelMonad Result FS where
+  retRel r = FS (const.return $ r)
+  fs >%= f = FS $ \cwd ->
+    let applied = (f <$> (runFS fs cwd)) -- x :: IO (Result (FS b))
+    in applied >>= result (\s -> runFS s cwd) (return . Failure)
+
+relLS :: FS [FilePath]
+relLS = rSetMessage "Hello World" listFiles
+
+
+instance RelMonad (Reader FilePath) FS where
+  retRel r = FS (return . return . (runReader r))
+  fs >%= f = FS $ \cwd -> (runFS fs cwd) >>= (\a -> inner a f cwd )
+    where
+      inner :: Result a -> (Reader FilePath a -> Reader FilePath (FS b)) -> FilePath -> IO (Result b)
+      inner r f cwd = (simplify cwd) (fmap (f . reader . const) r)
+      simplify ::  FilePath -> Result (Reader FilePath (FS b)) -> IO (Result b)
+      simplify cwd = result (\x  -> runFS (runReader x cwd) cwd) (return . failure)
