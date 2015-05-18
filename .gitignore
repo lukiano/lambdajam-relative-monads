@@ -1,3 +1,13 @@
-.cabal-sandbox/
-cabal.sandbox.config
-dist/
+/haskell/.cabal-sandbox/
+/haskell/cabal.sandbox.config
+/haskell/dist/
+/scala/project/target
+/scala/project/project/target
+/scala/project/source.scala
+/scala/target/*
+metastore_db
+derby.log
+.idea
+.idea_modules
+.ensime
+.ensime_cache

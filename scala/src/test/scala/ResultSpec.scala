@@ -75,6 +75,6 @@ Result should:
   )
 
   def addMessageError = prop((x: String, message: String) =>
-    Result.error(x).addMessage(message, ": ").toEither must beLeft(s"$message:$x")
+    Result.error(x).addMessage(message, ": ").toEither must beLeft(s"$message: $x")
   )
 }
