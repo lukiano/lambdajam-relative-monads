@@ -75,9 +75,45 @@ relLS = rSetMessage "Hello World" listFiles
 
 instance RelMonad (Reader FilePath) FS where
   retRel r = FS (return . return . (runReader r))
-  fs >%= f = FS $ \cwd -> (runFS fs cwd) >>= (\a -> inner a f cwd )
+  fs >%= f = g f (fs2r fs)
+    where
+      g :: (Reader FilePath a -> Reader FilePath (FS b)) -> Reader FilePath (IO (Result a)) -> FS b
+      g h r = r2fs (r >>= \x -> simplify ((fmap (fmap (h.return))) x))
+      simplify :: IO (Result (Reader FilePath (FS b))) -> Reader FilePath (IO (Result b))
+      simplify a = simplify2 $ reader (\cwd -> (fmap (fmap (\r -> runReader (r >>= fs2r) (cwd ++ "a"))) a))
+      simplify2 :: Reader FilePath (IO (Result (IO (Result a)))) -> Reader FilePath (IO (Result a))
+      simplify2 a = fmap (\x -> x >>= result id (return . failure)) a
+      
+fs2r :: FS a -> Reader FilePath (IO (Result a))
+fs2r fs = do
+  cwd <- ask
+  return $ runFS fs (cwd ++ "x")
+
+r2fs :: Reader FilePath (IO (Result a)) -> FS a
+r2fs r = FS $ \cwd -> runReader r (cwd ++ "b")
+
+{-      x :: (Reader FilePath a -> Reader FilePath (FS b)) -> a -> FS b
+      x f a = simplify (f (return a))
+      simplify :: Reader FilePath (FS b) -> FS b
+      simplify r = FS $ \cwd -> runReader (inner r) cwd
+      inner :: Reader FilePath (FS b) -> Reader FilePath (IO (Result b))
+      inner r = do
+        ifs <- r
+        nwd <- ask
+        return (runFS ifs nwd)
+-}
+
+
+    {-FS $ \cwd -> (runFS fs cwd) >>= (\a -> inner a f cwd )
     where
       inner :: Result a -> (Reader FilePath a -> Reader FilePath (FS b)) -> FilePath -> IO (Result b)
       inner r f cwd = (simplify cwd) (fmap (f . reader . const) r)
       simplify ::  FilePath -> Result (Reader FilePath (FS b)) -> IO (Result b)
       simplify cwd = result (\x  -> runFS (runReader x cwd) cwd) (return . failure)
+      extra :: FilePath -> Reader FilePath (FS b) -> IO (Result b)
+      extra cwd r = runReader (other r) cwd
+      other :: Reader FilePath (FS b) -> Reader FilePath (IO (Result b))
+      other r = do
+        fs <- r
+        asks (runFS fs)
+-}

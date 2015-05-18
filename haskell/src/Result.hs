@@ -22,9 +22,18 @@ instance Monad Result where
   (Success a) >>= f = f a
   (Failure s) >>= _ = failure s
 
+-- $setup
+-- import Test.QuickCheck
+
+-- | Creates a successful result
+--
+-- prop> success a == Success a
 success :: a -> Result a
 success = Success
 
+-- | Creates a failed result
+--
+-- prop> failure a == Failure a
 failure :: String -> Result a
 failure = Failure
   
@@ -32,9 +41,17 @@ result :: (a -> b) -> (String -> b) -> Result a -> b
 result f _ (Success a) = f a
 result _ g (Failure s) = g s
 
+-- | Set error message
+--
+-- >>> setMessage "error" (failure "other")
+-- Failure "error"
 setMessage :: String -> Result a -> Result a
 setMessage msg = result success (const (failure msg))
 
+-- | Set error message
+--
+-- >>> addMessage "error" (failure "other")
+-- Failure "errorother"
 addMessage :: String -> Result a -> Result a
 addMessage msg = result success (failure . (msg ++))
 

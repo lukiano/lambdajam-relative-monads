@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuite hostname="hoermast_MacOSX" name="lambdajam.ResultSpec" tests="12" errors="0" failures="1" time="1.778">
+                     <properties>
+      <property name="jline.esc.timeout" value="0"/><property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/><property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib"/><property name="java.vm.version" value="24.65-b04"/><property name="user.country.format" value="AU"/><property name="sbt.global.base" value="/Users/shoermann/.sbt/0.13.8"/><property name="gopherProxySet" value="false"/><property name="java.vm.vendor" value="Oracle Corporation"/><property name="java.vendor.url" value="http://java.oracle.com/"/><property name="path.separator" value=":"/><property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/><property name="file.encoding.pkg" value="sun.io"/><property name="user.country" value="US"/><property name="sun.java.launcher" value="SUN_STANDARD"/><property name="sun.os.patch.level" value="unknown"/><property name="java.vm.specification.name" value="Java Virtual Machine Specification"/><property name="user.dir" value="/Users/shoermann/workspace/lambdajam-workshop/scala"/><property name="java.runtime.version" value="1.7.0_67-b01"/><property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/><property name="java.endorsed.dirs" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/endorsed"/><property name="os.arch" value="x86_64"/><property name="java.io.tmpdir" value="/var/folders/1y/dp1x_rqs1d57p_tnfq70c8xr0000gp/T/"/><property name="line.separator" value="
+"/><property name="java.vm.specification.vendor" value="Oracle Corporation"/><property name="https.proxyHost" value="127.0.0.1"/><property name="os.name" value="Mac OS X"/><property name="sun.jnu.encoding" value="UTF-8"/><property name="java.library.path" value="/Users/shoermann/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/><property name="http.proxyPort" value="3128"/><property name="java.specification.name" value="Java Platform API Specification"/><property name="java.class.version" value="51.0"/><property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/><property name="os.version" value="10.10.3"/><property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/><property name="user.home" value="/Users/shoermann"/><property name="sbt.override.build.repos" value="true"/><property name="user.timezone" value="Australia/Sydney"/><property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/><property name="file.encoding" value="UTF8"/><property name="java.specification.version" value="1.7"/><property name="sbt.repository.config" value="/Users/shoermann/workspace/tooling.repositories/repositories-dev"/><property name="java.class.path" value="/Users/shoermann/.sbt/launch/0.13.8/sbt-launch.jar"/><property name="user.name" value="shoermann"/><property name="jline.shutdownhook" value="false"/><property name="java.vm.specification.version" value="1.7"/><property name="sun.java.command" value="/Users/shoermann/.sbt/launch/0.13.8/sbt-launch.jar  shell"/><property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre"/><property name="sun.arch.data.model" value="64"/><property name="user.language" value="en"/><property name="java.specification.vendor" value="Oracle Corporation"/><property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/><property name="java.vm.info" value="mixed mode"/><property name="java.version" value="1.7.0_67"/><property name="java.ext.dirs" value="/Users/shoermann/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/><property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/classes"/><property name="http.proxyHost" value="127.0.0.1"/><property name="java.vendor" value="Oracle Corporation"/><property name="file.separator" value="/"/><property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/><property name="sun.io.unicode.encoding" value="UnicodeBig"/><property name="sun.cpu.endian" value="little"/><property name="https.proxyPort" value="3128"/><property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/><property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/><property name="sun.cpu.isalist" value=""/>
+    </properties>
+                     <testcase classname="lambdajam.ResultSpec" name="obey monad laws" time="0.482">
+                                                 
+                                               </testcase><testcase classname="lambdajam.ResultSpec" name="obey equal laws" time="0.406">
+                                                 
+                                               </testcase><testcase classname="lambdajam.ResultSpec" name="obey plus laws" time="0.376">
+                                                 
+                                               </testcase><testcase classname="lambdajam.ResultSpec" name="toEither should roundtrip" time="0.31">
+                                                 
+                                               </testcase><testcase classname="lambdajam.ResultSpec" name="getOrElse should always return value for Ok" time="0.024">
+                                                 
+                                               </testcase><testcase classname="lambdajam.ResultSpec" name="getOrElse should always return else for Error" time="0.026">
+                                                 
+                                               </testcase><testcase classname="lambdajam.ResultSpec" name="or returns first Ok" time="0.024">
+                                                 
+                                               </testcase><testcase classname="lambdajam.ResultSpec" name="or skips first Error" time="0.026">
+                                                 
+                                               </testcase><testcase classname="lambdajam.ResultSpec" name="setMessage on Ok is noop" time="0.019">
+                                                 
+                                               </testcase><testcase classname="lambdajam.ResultSpec" name="setMessage on Error always sets message" time="0.035">
+                                                 
+                                               </testcase><testcase classname="lambdajam.ResultSpec" name="addMessage on Ok is noop" time="0.023">
+                                                 
+                                               </testcase><testcase classname="lambdajam.ResultSpec" name="addMessage on Error always adds message, prepending to any existing messages" time="0.027">
+                                                 <failure message="Falsified after 0 passed tests.
+&gt; ARG_0: &quot;&quot;
+&gt; ARG_1: &quot;&quot;
+&gt; 'Left(: )' is Left but ': ' is not equal to ':'" type="java.lang.Exception">java.lang.Exception: Falsified after 0 passed tests.
+&gt; ARG_0: &quot;&quot;
+&gt; ARG_1: &quot;&quot;
+&gt; 'Left(: )' is Left but ': ' is not equal to ':'
+	at lambdajam.Test.check(Test.scala:20)
+</failure>
+                                               </testcase>
+                     <system-out></system-out>
+                     <system-err></system-err>
+                   </testsuite>

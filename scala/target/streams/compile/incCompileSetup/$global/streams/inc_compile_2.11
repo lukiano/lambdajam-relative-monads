@@ -1,0 +1,234 @@
+format version: 5
+output mode:
+1 items
+0 -> single
+output directories:
+1 items
+output dir -> /Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes
+compile options:
+9 items
+0 -> -deprecation
+1 -> -unchecked
+2 -> -Xlint
+3 -> -Ywarn-dead-code
+4 -> -Ywarn-value-discard
+5 -> -Ywarn-unused-import
+6 -> -feature
+7 -> -language:_
+8 -> -target:jvm-1.7
+javac options:
+0 items
+compiler version:
+1 items
+0 -> 2.11.6
+compile order:
+1 items
+0 -> Mixed
+name hashing:
+1 items
+0 -> true
+products:
+22 items
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Error$.class
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Error.class
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Ok$.class
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Ok.class
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anon$1.class
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anon$2.class
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anon$3.class
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anonfun$addMessage$1.class
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anonfun$addMessage$2.class
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anonfun$flatMap$1.class
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anonfun$getOrElse$1.class
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anonfun$getOrElse$2.class
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anonfun$map$1.class
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anonfun$or$1.class
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anonfun$or$2.class
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anonfun$setMessage$1.class
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anonfun$setMessage$2.class
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anonfun$toEither$1.class
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anonfun$toEither$2.class
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$.class
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$class.class
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result.class
+binary dependencies:
+3 items
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/rt.jar
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Users/shoermann/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.6.jar
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> /Users/shoermann/.ivy2/cache/org.scalaz/scalaz-core_2.11/bundles/scalaz-core_2.11-7.1.1.jar
+direct source dependencies:
+0 items
+direct external dependencies:
+0 items
+public inherited source dependencies:
+0 items
+public inherited external dependencies:
+0 items
+member reference internal dependencies:
+0 items
+member reference external dependencies:
+0 items
+inheritance internal dependencies:
+0 items
+inheritance external dependencies:
+0 items
+class names:
+22 items
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> lambdajam.Error
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> lambdajam.Error$
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> lambdajam.Ok
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> lambdajam.Ok$
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> lambdajam.Result
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> lambdajam.Result$
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> lambdajam.Result$$anon$1
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> lambdajam.Result$$anon$2
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> lambdajam.Result$$anon$3
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> lambdajam.Result$$anonfun$addMessage$1
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> lambdajam.Result$$anonfun$addMessage$2
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> lambdajam.Result$$anonfun$flatMap$1
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> lambdajam.Result$$anonfun$getOrElse$1
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> lambdajam.Result$$anonfun$getOrElse$2
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> lambdajam.Result$$anonfun$map$1
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> lambdajam.Result$$anonfun$or$1
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> lambdajam.Result$$anonfun$or$2
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> lambdajam.Result$$anonfun$setMessage$1
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> lambdajam.Result$$anonfun$setMessage$2
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> lambdajam.Result$$anonfun$toEither$1
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> lambdajam.Result$$anonfun$toEither$2
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> lambdajam.Result$class
+used names:
+80 items
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> $anon
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> &&
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> <byname>
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> <init>
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> ==
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> A
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> AnyRef
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> B
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> Either
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> Equal
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> Error
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> Function1
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> Left
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> Monad
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> NonFatal
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> None
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> Ok
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> Plus
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> Predef
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> Product
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> Result
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> Right
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> ScalaRunTime
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> Serializable
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> String
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> StringContext
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> X
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> _1
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> _2
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> _hashCode
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> _root_
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> _toString
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> a
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> a1
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> a2
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> andThen
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> apply
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> asInstanceOf
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> b
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> control
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> els
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> eq
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> error
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> f
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> flatMap
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> fold
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> get
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> getMessage
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> identity
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> isEmpty
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> isInstanceOf
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> lambdajam
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> m
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> m1
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> m2
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> message
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> msg
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> ne
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> ok
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> or
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> other
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> package
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> r
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> r1
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> r2
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> runtime
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> s
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> scala
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> scalaz
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> separator
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> t
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> thunk
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> toString
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> typedProductIterator
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> unapply
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> unary_!
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> util
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> v
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> value
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> ||
+product stamps:
+22 items
+/Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Error$.class -> lastModified(1431910394000)
+/Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Error.class -> lastModified(1431910394000)
+/Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Ok$.class -> lastModified(1431910394000)
+/Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Ok.class -> lastModified(1431910394000)
+/Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anon$1.class -> lastModified(1431910394000)
+/Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anon$2.class -> lastModified(1431910394000)
+/Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anon$3.class -> lastModified(1431910394000)
+/Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anonfun$addMessage$1.class -> lastModified(1431910394000)
+/Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anonfun$addMessage$2.class -> lastModified(1431910394000)
+/Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anonfun$flatMap$1.class -> lastModified(1431910394000)
+/Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anonfun$getOrElse$1.class -> lastModified(1431910394000)
+/Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anonfun$getOrElse$2.class -> lastModified(1431910394000)
+/Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anonfun$map$1.class -> lastModified(1431910394000)
+/Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anonfun$or$1.class -> lastModified(1431910394000)
+/Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anonfun$or$2.class -> lastModified(1431910394000)
+/Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anonfun$setMessage$1.class -> lastModified(1431910394000)
+/Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anonfun$setMessage$2.class -> lastModified(1431910394000)
+/Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anonfun$toEither$1.class -> lastModified(1431910394000)
+/Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$$anonfun$toEither$2.class -> lastModified(1431910394000)
+/Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$.class -> lastModified(1431910394000)
+/Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result$class.class -> lastModified(1431910394000)
+/Users/shoermann/workspace/lambdajam-workshop/scala/target/scala-2.11/classes/lambdajam/Result.class -> lastModified(1431910394000)
+source stamps:
+1 items
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> hash(ffac6c6b5188f0209d5dc37977cff45a82c4ccb2)
+binary stamps:
+3 items
+/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/rt.jar -> lastModified(1406304240000)
+/Users/shoermann/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.6.jar -> lastModified(1424912463000)
+/Users/shoermann/.ivy2/cache/org.scalaz/scalaz-core_2.11/bundles/scalaz-core_2.11-7.1.1.jar -> lastModified(1423233166000)
+class names:
+3 items
+/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/jre/lib/rt.jar -> java.lang.Object
+/Users/shoermann/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.6.jar -> scala.Product
+/Users/shoermann/.ivy2/cache/org.scalaz/scalaz-core_2.11/bundles/scalaz-core_2.11-7.1.1.jar -> scalaz.Monad
+internal apis:
+1 items
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> 
+rO0ABXNyABB4c2J0aS5hcGkuU291cmNlFlpwRASfbtoCAAZJAAdhcGlIYXNoWgAIaGFzTWFjcm9MABhfaW50ZXJuYWxPbmx5X25hbWVIYXNoZXN0ACRMeHNidGkvYXBpL19pbnRlcm5hbE9ubHlfTmFtZUhhc2hlcztMAANhcGl0ABVMeHNidGkvYXBpL1NvdXJjZUFQSTtMAAtjb21waWxhdGlvbnQAF0x4c2J0aS9hcGkvQ29tcGlsYXRpb247WwAEaGFzaHQAAltCeHDhe6A3AHNyACJ4c2J0aS5hcGkuX2ludGVybmFsT25seV9OYW1lSGFzaGVzVNq+mfrU7EwCAAJbAA9pbXBsaWNpdE1lbWJlcnN0ACNbTHhzYnRpL2FwaS9faW50ZXJuYWxPbmx5X05hbWVIYXNoO1sADnJlZ3VsYXJNZW1iZXJzcQB+AAd4cHVyACNbTHhzYnRpLmFwaS5faW50ZXJuYWxPbmx5X05hbWVIYXNoO0lagLbdlov0AgAAeHAAAAADc3IAIHhzYnRpLmFwaS5faW50ZXJuYWxPbmx5X05hbWVIYXNoWw71InY4V88CAAJJAARoYXNoTAAEbmFtZXQAEkxqYXZhL2xhbmcvU3RyaW5nO3hwjhgP63QAC1Jlc3VsdEVxdWFsc3EAfgALA+SVSXQAClJlc3VsdFBsdXNzcQB+AAsG5mGudAALUmVzdWx0TW9uYWR1cQB+AAkAAAAsc3EAfgALh5rtKHQABm5vdGlmeXNxAH4AC7AT7rF0AAR3YWl0c3EAfgALb/UGyHQADSRhc0luc3RhbmNlT2ZzcQB+AAu6pikZdAADbWFwc3EAfgALwnbwL3QADHByb2R1Y3RBcml0eXNxAH4AC9ssufZ0AAZlcXVhbHNzcQB+AAuR5iSTdAAFRXJyb3JzcQB+AAvd9UfidAAMYXNJbnN0YW5jZU9mc3EAfgALWQ1ErXQADHN5bmNocm9uaXplZHNxAH4AC4oNTvV0AA0kaXNJbnN0YW5jZU9mc3EAfgAL5q1RvXQACHRvRWl0aGVyc3EAfgALpPLOgXQABGZvbGRzcQB+AAuLToaDdAAIY2FuRXF1YWxzcQB+AAvXW/78dAACb3JzcQB+AAsA+MNWdAAEc2FmZXNxAH4AC5vXsUB0AA1wcm9kdWN0UHJlZml4c3EAfgALp/IPsHQACW5vdGlmeUFsbHNxAH4AC4vn0EB0AAJPa3NxAH4AC2gi+350AAxpc0luc3RhbmNlT2ZzcQB+AAvf+5IidAAGPGluaXQ+c3EAfgAL5bnfz3QABWVycm9yc3EAfgALuWwCHnQAB2ZsYXRNYXBzcQB+AAv9fdCvdAAJZ2V0T3JFbHNlc3EAfgALQx6YgHQAAj09c3EAfgAL0aV/6nQABWNsb25lc3EAfgALG7gVPHQABiRpbml0JHNxAH4ACyI2d7R0AARjb3B5c3EAfgALN1xn93QACHRvU3RyaW5nc3EAfgALmWolo3QAAiE9c3EAfgAL2fC9BHQAFGFkZE1lc3NhZ2UkZGVmYXVsdCQyc3EAfgALlWCgsnQAAm9rc3EAfgALIUXLrXQACGdldENsYXNzc3EAfgALdCLdNXQADmNvcHkkZGVmYXVsdCQxc3EAfgALEo4QBXQACnNldE1lc3NhZ2VzcQB+AAvFg9UBdAAGUmVzdWx0c3EAfgALQLueYnQAAm5lc3EAfgALJ1AIFXQABXZhbHVlc3EAfgALvUcUGHQAAmVxc3EAfgALW34TQXQAD3Byb2R1Y3RJdGVyYXRvcnNxAH4AC28YHrp0AAIjI3NxAH4AC8Akkl10AAhmaW5hbGl6ZXNxAH4AC24ucrZ0AAphZGRNZXNzYWdlc3EAfgALmprFWHQADnByb2R1Y3RFbGVtZW50c3EAfgALJvkoSnQACGhhc2hDb2Rlc3IAE3hzYnRpLmFwaS5Tb3VyY2VBUEm5Xqf5KSM4pAIAAlsAC2RlZmluaXRpb25zdAAXW0x4c2J0aS9hcGkvRGVmaW5pdGlvbjtbAAhwYWNrYWdlc3QAFFtMeHNidGkvYXBpL1BhY2thZ2U7eHB1cgAXW0x4c2J0aS5hcGkuRGVmaW5pdGlvbjuIyVzntONeDgIAAHhwAAAABHNyABN4c2J0aS5hcGkuQ2xhc3NMaWtlgzQcod+wl2wCAARMAA5kZWZpbml0aW9uVHlwZXQAGkx4c2J0aS9hcGkvRGVmaW5pdGlvblR5cGU7WwAQc2F2ZWRBbm5vdGF0aW9uc3QAE1tMamF2YS9sYW5nL1N0cmluZztMAAhzZWxmVHlwZXQAEEx4c2J0aS9hcGkvTGF6eTtMAAlzdHJ1Y3R1cmVxAH4AdXhyACF4c2J0aS5hcGkuUGFyYW1ldGVyaXplZERlZmluaXRpb275EW6x1VA84gIAAVsADnR5cGVQYXJhbWV0ZXJzdAAaW0x4c2J0aS9hcGkvVHlwZVBhcmFtZXRlcjt4cgAUeHNidGkuYXBpLkRlZmluaXRpb26HKhvocULjRgIABEwABmFjY2Vzc3QAEkx4c2J0aS9hcGkvQWNjZXNzO1sAC2Fubm90YXRpb25zdAAXW0x4c2J0aS9hcGkvQW5ub3RhdGlvbjtMAAltb2RpZmllcnN0ABVMeHNidGkvYXBpL01vZGlmaWVycztMAARuYW1lcQB+AAx4cHNyABB4c2J0aS5hcGkuUHVibGljulg9rmwtYEICAAB4cgAQeHNidGkuYXBpLkFjY2Vzc91imvgdYzFIAgAAeHB1cgAXW0x4c2J0aS5hcGkuQW5ub3RhdGlvbjvrl+sZEPaNSAIAAHhwAAAAAHNyABN4c2J0aS5hcGkuTW9kaWZpZXJzxxETIWmc3CQCAAFCAAVmbGFnc3hwCXQAEGxhbWJkYWphbS5SZXN1bHR1cgAaW0x4c2J0aS5hcGkuVHlwZVBhcmFtZXRlcjvZbSYPKJ3ytgIAAHhwAAAAAXNyABd4c2J0aS5hcGkuVHlwZVBhcmFtZXRlcmdpVdvjcpBrAgAGWwALYW5ub3RhdGlvbnNxAH4AekwAAmlkcQB+AAxMAApsb3dlckJvdW5kdAAQTHhzYnRpL2FwaS9UeXBlO1sADnR5cGVQYXJhbWV0ZXJzcQB+AHdMAAp1cHBlckJvdW5kcQB+AIhMAAh2YXJpYW5jZXQAFEx4c2J0aS9hcGkvVmFyaWFuY2U7eHB1cQB+AIAAAAAAdAASbGFtYmRhamFtLlJlc3VsdC5Bc3IAFHhzYnRpLmFwaS5Qcm9qZWN0aW9u89KNVOlFpC0CAAJMAAJpZHEAfgAMTAAGcHJlZml4dAAWTHhzYnRpL2FwaS9TaW1wbGVUeXBlO3hyABR4c2J0aS5hcGkuU2ltcGxlVHlwZXJ4YoghI79AAgAAeHIADnhzYnRpLmFwaS5UeXBlP2rZIRZJqsoCAAB4cHQAB05vdGhpbmdzcgATeHNidGkuYXBpLlNpbmdsZXRvbvynX/jPVuRGAgABTAAEcGF0aHQAEEx4c2J0aS9hcGkvUGF0aDt4cQB+AI9zcgAOeHNidGkuYXBpLlBhdGibPVwIzqUnhAI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uAXVxAH4AcAAAAABwc3EAfgCuAXVxAH4AvQAAAAdzcQB+AI1xAH4A5HNxAH4Ak3NxAH4AlnVxAH4AmQAAAAJzcQB+AJtxAH4AnnEAfgCgc3EAfgCNcQB+AORzcQB+AJNzcQB+AJZ1cQB+AJkAAAADc3EAfgCbcQB+AMVzcQB+AJt0AAJpb3EAfgCgc3EAfgCNcQB+APFxAH4BHnNxAH4AjXQABkVxdWFsc3EAfgEec3EAfgD0c3EAfgCNdAAGUmVzdWx0c3EAfgCTc3EAfgCWdXEAfgCZAAAAAnNxAH4Am3QACWxhbWJkYWphbXEAfgCgdXEAfgC9AAAAAXNxAH4A/3QAEWxhbWJkYWphbS5FcnJvci5Bc3EAfgCNcQB+AMBzcQB+AJNzcQB+AJZ1cQB+AJkAAAADc3EAfgCbcQB+AMVzcQB+AJtxAH4Ax3EAfgCgc3EAfgCNcQB+AKNxAH4BHnBwc3EAfgBycQB+AH91cQB+AIAAAAAAc3EAfgCCAHQAEGxhbWJkYWphbS5SZXN1bHR1cQB+AIUAAAAAfnEAfgCodAAGTW9kdWxldXEAfgCrAAAAAHNxAH4ArgFxAH4AtHBzcQB+AK4Bc3EAfgC2c3EAfgCuAXVxAH4AcAAAAABwc3EAfgCuAXVxAH4AcAAAAABwc3EAfgCuAXVxAH4AvQAAAAJzcQB+AI1xAH4AwHNxAH4Ak3NxAH4AlnVxAH4AmQAAAANzcQB+AJtxAH4AxXNxAH4Am3EAfgDHcQB+AKBzcQB+AI1xAH4Ao3NxAH4Ak3NxAH4AlnVxAH4AmQAAAAJzcQB+AJtxAH4AnnEAfgCgcHB1cgAUW0x4c2J0aS5hcGkuUGFja2FnZTtbExk3cKcnoQIAAHhwAAAAAXNyABF4c2J0aS5hcGkuUGFja2FnZX5Zj/auzjlYAgABTAAEbmFtZXEAfgAMeHB0AAlsYW1iZGFqYW1zcgAVeHNidGkuYXBpLkNvbXBpbGF0aW9u7frgw2rooEICAAJKAAlzdGFydFRpbWVbAAdvdXRwdXRzdAAaW0x4c2J0aS9hcGkvT3V0cHV0U2V0dGluZzt4cAAAAU1kgqXadXIAGltMeHNidGkuYXBpLk91dHB1dFNldHRpbmc7f2rC86eHpUICAAB4cAAAAAFzcgAXeHNidGkuYXBpLk91dHB1dFNldHRpbmd62ZpHdPsdewIAAkwAD291dHB1dERpcmVjdG9yeXEAfgAMTAAPc291cmNlRGlyZWN0b3J5cQB+AAx4cHQATS9Vc2Vycy9zaG9lcm1hbm4vd29ya3NwYWNlL2xhbWJkYWphbS13b3Jrc2hvcC9zY2FsYS90YXJnZXQvc2NhbGEtMi4xMS9jbGFzc2VzdAABL3VyAAJbQqzzF/gGCFTgAgAAeHAAAAAU/6xsa1GI8CCdXcN5d8/0WoLEzLI=
+external apis:
+0 items
+source infos:
+1 items
+/Users/shoermann/workspace/lambdajam-workshop/scala/src/main/scala/Result.scala -> 
+AAAAAAAAAAA=
+compilations:
+5 items
+0 -> rO0ABXNyABV4c2J0aS5hcGkuQ29tcGlsYXRpb27t+uDDauigQgIAAkoACXN0YXJ0VGltZVsAB291dHB1dHN0ABpbTHhzYnRpL2FwaS9PdXRwdXRTZXR0aW5nO3hwAAABTWR44uZ1cgAaW0x4c2J0aS5hcGkuT3V0cHV0U2V0dGluZzt/asLzp4elQgIAAHhwAAAAAXNyABd4c2J0aS5hcGkuT3V0cHV0U2V0dGluZ3rZmkd0+x17AgACTAAPb3V0cHV0RGlyZWN0b3J5dAASTGphdmEvbGFuZy9TdHJpbmc7TAAPc291cmNlRGlyZWN0b3J5cQB+AAZ4cHQATS9Vc2Vycy9zaG9lcm1hbm4vd29ya3NwYWNlL2xhbWJkYWphbS13b3Jrc2hvcC9zY2FsYS90YXJnZXQvc2NhbGEtMi4xMS9jbGFzc2VzdAABLw==
+1 -> rO0ABXNyABV4c2J0aS5hcGkuQ29tcGlsYXRpb27t+uDDauigQgIAAkoACXN0YXJ0VGltZVsAB291dHB1dHN0ABpbTHhzYnRpL2FwaS9PdXRwdXRTZXR0aW5nO3hwAAABTWR5HR91cgAaW0x4c2J0aS5hcGkuT3V0cHV0U2V0dGluZzt/asLzp4elQgIAAHhwAAAAAXNyABd4c2J0aS5hcGkuT3V0cHV0U2V0dGluZ3rZmkd0+x17AgACTAAPb3V0cHV0RGlyZWN0b3J5dAASTGphdmEvbGFuZy9TdHJpbmc7TAAPc291cmNlRGlyZWN0b3J5cQB+AAZ4cHQATS9Vc2Vycy9zaG9lcm1hbm4vd29ya3NwYWNlL2xhbWJkYWphbS13b3Jrc2hvcC9zY2FsYS90YXJnZXQvc2NhbGEtMi4xMS9jbGFzc2VzdAABLw==
+2 -> rO0ABXNyABV4c2J0aS5hcGkuQ29tcGlsYXRpb27t+uDDauigQgIAAkoACXN0YXJ0VGltZVsAB291dHB1dHN0ABpbTHhzYnRpL2FwaS9PdXRwdXRTZXR0aW5nO3hwAAABTWR/2Bt1cgAaW0x4c2J0aS5hcGkuT3V0cHV0U2V0dGluZzt/asLzp4elQgIAAHhwAAAAAXNyABd4c2J0aS5hcGkuT3V0cHV0U2V0dGluZ3rZmkd0+x17AgACTAAPb3V0cHV0RGlyZWN0b3J5dAASTGphdmEvbGFuZy9TdHJpbmc7TAAPc291cmNlRGlyZWN0b3J5cQB+AAZ4cHQATS9Vc2Vycy9zaG9lcm1hbm4vd29ya3NwYWNlL2xhbWJkYWphbS13b3Jrc2hvcC9zY2FsYS90YXJnZXQvc2NhbGEtMi4xMS9jbGFzc2VzdAABLw==
+3 -> rO0ABXNyABV4c2J0aS5hcGkuQ29tcGlsYXRpb27t+uDDauigQgIAAkoACXN0YXJ0VGltZVsAB291dHB1dHN0ABpbTHhzYnRpL2FwaS9PdXRwdXRTZXR0aW5nO3hwAAABTWSCYuB1cgAaW0x4c2J0aS5hcGkuT3V0cHV0U2V0dGluZzt/asLzp4elQgIAAHhwAAAAAXNyABd4c2J0aS5hcGkuT3V0cHV0U2V0dGluZ3rZmkd0+x17AgACTAAPb3V0cHV0RGlyZWN0b3J5dAASTGphdmEvbGFuZy9TdHJpbmc7TAAPc291cmNlRGlyZWN0b3J5cQB+AAZ4cHQATS9Vc2Vycy9zaG9lcm1hbm4vd29ya3NwYWNlL2xhbWJkYWphbS13b3Jrc2hvcC9zY2FsYS90YXJnZXQvc2NhbGEtMi4xMS9jbGFzc2VzdAABLw==
+4 -> rO0ABXNyABV4c2J0aS5hcGkuQ29tcGlsYXRpb27t+uDDauigQgIAAkoACXN0YXJ0VGltZVsAB291dHB1dHN0ABpbTHhzYnRpL2FwaS9PdXRwdXRTZXR0aW5nO3hwAAABTWSCpdp1cgAaW0x4c2J0aS5hcGkuT3V0cHV0U2V0dGluZzt/asLzp4elQgIAAHhwAAAAAXNyABd4c2J0aS5hcGkuT3V0cHV0U2V0dGluZ3rZmkd0+x17AgACTAAPb3V0cHV0RGlyZWN0b3J5dAASTGphdmEvbGFuZy9TdHJpbmc7TAAPc291cmNlRGlyZWN0b3J5cQB+AAZ4cHQATS9Vc2Vycy9zaG9lcm1hbm4vd29ya3NwYWNlL2xhbWJkYWphbS13b3Jrc2hvcC9zY2FsYS90YXJnZXQvc2NhbGEtMi4xMS9jbGFzc2VzdAABLw==
