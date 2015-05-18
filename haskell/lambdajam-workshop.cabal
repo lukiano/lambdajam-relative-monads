@@ -20,6 +20,7 @@ library
     RelResult
     Result
     ResultT
+                  RelResIO
 
   default-extensions:
     MultiParamTypeClasses

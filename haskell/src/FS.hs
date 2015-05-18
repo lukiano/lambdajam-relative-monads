@@ -30,10 +30,26 @@ instance Monad FS where
 
 mapResult :: (Result a -> Result b) -> FS a -> FS b
 mapResult f fs = FS $ \cwd -> f <$> (runFS fs cwd)
-
+    
 -- | Set the error message in a failure case. Useful for providing contextual information without
 -- having to inspect result.
 -- NB: This discards any existing message.
+
+-- -- prop> monadic $ do setMessage msg fs
+-- --                   assert
+
+-- $setup
+-- >>> import Test.QuickCheck
+-- >>> import Test.QuickCheck.Monadic
+
+---- | set a new error message on existing errors
+--
+----- prop> monadic $ do setMessage msg fs
+--                    assert
+
+-- >>> flatMapResult (setMessage "error" (failure "other")) (\(Failure "error") -> True)
+-- True
+
 setMessage :: String -> FS a -> FS a
 setMessage msg = mapResult (R.setMessage msg)
 
