@@ -1,9 +1,0 @@
-compile
-reload
-compile
-test
-reload
-compile
-~compile
-~test:compile
-test
