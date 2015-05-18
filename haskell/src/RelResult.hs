@@ -18,12 +18,6 @@ rOr r1 r2 = r1 >%= \a -> case a of
   Failure _ -> success r2
   Success s -> success (retRel (success s))
 
-rFinally :: (RelMonad Result r) => r a -> r b -> r a
-rFinally a sequel = a >%= inner
-  where
-    inner :: (RelMonad Result r) => Result a -> Result (r a)
-    inner x = return sequel >> return (retRel x)
-
 rOnException :: (RelMonad Result r) => r a -> r b -> r a
 rOnException a sequel = a >%= inner
   where
@@ -34,6 +28,12 @@ rOnException a sequel = a >%= inner
     inner :: (RelMonad Result r) => Result a -> Result (r a)
     inner = result s f
 
+rFinally :: (Monad r, RelMonad Result r) => r a -> r b -> r a
+rFinally a sequel = do
+  r <- rOnException a sequel
+  _ <- sequel
+  return r
+  
 rBracket :: (Monad r, RelMonad Result r) => r a -> (a -> r b) -> (a -> r c) -> r c
 rBracket before after during = do
   a <- before
