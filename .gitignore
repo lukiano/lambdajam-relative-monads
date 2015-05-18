@@ -4,7 +4,7 @@
 /scala/project/target
 /scala/project/project/target
 /scala/project/source.scala
-/scala/target/*
+target/
 metastore_db
 derby.log
 .idea
