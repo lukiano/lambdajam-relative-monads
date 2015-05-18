@@ -54,11 +54,22 @@ case class FS[A](runFS: File => Result[A]) {
   } yield r
 }
 
-object FS {
+object FS extends ToRelResultOps {
   def fs[A](a: => A): FS[A] = FS(_ => Result.safe(a))
 
   implicit def FSMonad: Monad[FS] = new Monad[FS] {
     def point[A](v: => A) = fs(v)
     def bind[A, B](a: FS[A])(f: A => FS[B]) = a.flatMap(f)
   }
+
+  implicit val relMonad: RelMonad[Result, FS] = new RelMonad[Result, FS] {
+    /** Similar to a `Monad.point` but expects a `Result`. */
+    def rPoint[A](v: => Result[A]): FS[A] = FS(_ => v)
+
+    /** Similar to a `Monad.bind` but expects a `Result`. */
+    def rBind[A, B](ma: FS[A])(f: Result[A] => Result[FS[B]]): FS[B] =
+      FS(x => f(ma.runFS(x)).fold(r => r.runFS(x), e => Result.error(e)))
+  }
+
+
 }

@@ -14,7 +14,12 @@
 
 package lambdajam
 
-import scalaz._, Scalaz._
+import scala.util.Random
+
+import java.io.File
+
+//import scalaz.Scalaz._
+import scalaz.{Equal, Monad}
 import scalaz.scalacheck.ScalazProperties.{monad, equal, plus}
 
 import org.specs2.matcher.Matcher
@@ -24,12 +29,11 @@ import org.scalacheck.Arbitrary, Arbitrary.arbitrary
 
 import Arbitraries._
 
-class FSSpec extends Test with FSMatchers { def is = s2"""
-FS
-==
+class RelFSSpec extends Test with FSMatchers { def is = s2"""
+Using FS relative to Result
+=====
 
- FS should:
-  obey monad laws                                                                            ${monad.laws[FS]}
+RelResult functions for FS should:
   allow setting an error message                                                             $setMessage
   allow adding an error message                                                              $addMessage
   onException does not change the result and performs the provided action on error           $onException
@@ -41,17 +45,17 @@ FS
 """
 
   def setMessage = prop((x: Result[Int], msg: String) =>
-    result(x).setMessage(msg) must beResult(x.setMessage(msg))
+    result(x).rSetMessage(msg) must beResult(x.setMessage(msg))
   )
   
   def addMessage = prop((x: Result[Int], msg: String) =>
-    result(x).addMessage(msg) must beResult(x.addMessage(msg))
+    result(x).rAddMessage(msg) must beResult(x.addMessage(msg))
   )
 
   def onException = prop ((x: FS[Int]) => {
     var flag = false
 
-    val actual = x.onException(FS(_ => { flag = true; Result.ok(2) }))
+    val actual = x.rOnException(FS(_ => { flag = true; Result.ok(2) }))
 
     actual must equal(x)
     actual must beResultLike {
@@ -62,7 +66,7 @@ FS
 
   def ensureAlwaysAction = prop ((x: FS[Int]) => {
     var flag = false
-    val actual = x.ensure(FS(_ => { flag = true; Result.ok(2) }))
+    val actual = x.rEnsure(FS(_ => { flag = true; Result.ok(2) }))
 
     actual must equal(x)
     flag must beTrue
@@ -70,12 +74,12 @@ FS
   })
 
   def ensureError = prop ((x: FS[Int], y: FS[Int]) => {
-    x.ensure(y) must equal (x.flatMap(_ => y.flatMap(_ => x)))
+    x.rEnsure(y) must equal (x.flatMap(_ => y.flatMap(_ => x)))
   })
 
   def bracket = prop ((x: FS[Int], y: FS[Int], z: FS[Int]) =>
-    x.bracket(_ => y)(_ => z) must equal (x.flatMap(_ => z).ensure(y))
+    x.rBracket(_ => y)(_ => z) must equal (x.flatMap(_ => z).rEnsure(y))
   )
 
-  def result[A](x: Result[A]): FS[A] = FS(_ => x)
+  def result[A](r: Result[A]): FS[A] = FS(_ => r)
 }

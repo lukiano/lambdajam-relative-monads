@@ -14,23 +14,11 @@
 
 package lambdajam
 
-import java.io.File
+trait RelMonad[M[_], R[_]]{
+  def rPoint[A](v: => M[A]): R[A]
+  def rBind[A, B](ma: R[A])(f: M[A] => M[R[B]]): R[B]
+}
 
-import scalaz.Equal
-
-import org.scalacheck.Arbitrary, Arbitrary._
-
-/** Aribtrary instances for omnitool types. */
-object Arbitraries {
-  /** Arbitrary instance for Result. */
-  implicit def ResultAribtrary[A : Arbitrary]: Arbitrary[Result[A]] =
-    Arbitrary(arbitrary[Either[String, A]] map {
-      case Left(v)  => Error(v)
-      case Right(v) => Ok(v)
-    })
-
-  /* Note these are not general purpose, specific to testing laws. */
-
-  implicit def FSAribtrary[A : Arbitrary]: Arbitrary[FS[A]] =
-    Arbitrary(arbitrary[Result[A]] map (r => FS(_ => r)))
+object RelMonad {
+  @inline def apply[M[_], R[_]](implicit RM: RelMonad[M, R]): RelMonad[M, R] = RM
 }
