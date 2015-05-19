@@ -54,7 +54,14 @@ final class RelResultOps[R[_], A](val self: R[A])(implicit RM: RelMonad[Result, 
     *
     * Returns the error of `self` iff both `self` and `other` fail.
     */
-  def rOr(other: R[A]): R[A] = ???
+  def rOr(other: R[A]): R[A] =
+    rFlatMap[A](_.fold(
+      x => RM.rPoint(Result.ok[A](x)),
+      e => other.rMap[A](_.fold(
+        y => Result.ok[A](y),
+        _ => Result.error[A](e)
+      ))
+    ))
 
   /**
     * Like "finally", but only performs the final action if there was an error.
