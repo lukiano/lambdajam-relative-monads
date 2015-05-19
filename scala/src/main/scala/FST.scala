@@ -16,31 +16,15 @@ package lambdajam
 
 import java.io.File
 
-import scalaz._, Scalaz._
+import scalaz.{KleisliFunctions, Monad, ReaderT}
 
-object FST {
+object FST extends KleisliFunctions {
   type FST[A] = ReaderT[Result, File, A]
 
-  implicit def readerTMonadResult[F[_], R](implicit M0: Monad[F]): MonadResult[({ type λ[α] = ReaderT[F, R, α] })#λ] = new ReaderTMonadResult[F, R] {
-    implicit def M: Monad[F] = M0
-  }
+  def apply[A](f: File => Result[A]): FST[A] = kleisli(f)
+  def ok[A](a: => A)                         = Monad[FST].point(a)
+  def error[A](e: String): FST[A]            = MonadResult.error[FST, A](e)
 
-  trait ReaderTMonadResult[F[_], R] extends MonadResult[({ type λ[α] = ReaderT[F, R, α] })#λ] {
-    implicit def M: Monad[F]
-
-    def raiseError[A](e: String): ReaderT[F, R, A] = ???
-    def handleError[A](ma: ReaderT[F, R, A])(f: String => ReaderT[F, R, A]): ReaderT[F, R, A] = ???
-
-    def point[A](a: => A): ReaderT[F, R, A] = ???//(M.point(a))
-    def bind[A, B](ma: ReaderT[F, R, A])(f: A => ReaderT[F, R, B]): ReaderT[F, R, B] = ???
-  }
-}
-
-trait MonadResult[M[_]] extends Monad[M] {
-  def raiseError[A](e: String): M[A]
-  def handleError[A](ma: M[A])(f: String => M[A]): M[A]
-}
-
-object MonadResult {
-  def apply[F[_]](implicit M: MonadResult[F]) = M
+  implicit def FSTMonadResultOps[A](v: FST[A]): MonadResultOps[FST, A] =
+    new MonadResultOps[FST, A](v)
 }
