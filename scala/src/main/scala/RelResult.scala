@@ -1,4 +1,4 @@
-//   Copyright 2014 Commonwealth Bank of Australia
+//   Copyright 2015 Commonwealth Bank of Australia
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -71,7 +71,7 @@ final class RelResultOps[R[_], A](val self: R[A])(implicit RM: RelMonad[Result, 
   def rOnException[B](action: R[B]): R[A] =
     rFlatMap(r => r.fold(
       _ => RM.rPoint(r),
-      e => action.rFlatMap(_ => RM.rPoint(Result.error(e)))
+      e => action.rMap(_ => Result.error(e))
     ))
 
   /**

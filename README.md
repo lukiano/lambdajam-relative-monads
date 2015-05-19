@@ -57,15 +57,19 @@ Exercises
   4. In order to use it implement `tLS` in `src/FST.hs` using the `MonadResult` functions.
 
 Extension exercises
-------------------
+-------------------
 
 Extension exercises can be found in `src/Extension.hs`
 
+* Can you derive a monad for `R` relative to a monad `M`? What about `MonadPlus`?
+* Can you create an instance of _relative monad_ for `IO` relative to `Result`?
 * Can you implement `tMap`?
 * Implement `rAsk` and `rLocal`
 * Can you create an instance of a _relative monad_ for `FS` relative to `Reader FilePath`?
 * Can you turn `RelMonad` into another of the `mtl` patterns such as `MonadError`, `MonadReader`, etc
   and use it the same way?
+
+
 
 Scala
 =====
@@ -112,10 +116,12 @@ Exercises
   4. In order to use it implement `tLS` in `src/main/scala/FST.scala` using the `MonadResult` functions.
 
 Extension exercises
-------------------
+-------------------
 
 Extension exercises can be found in `src/main/scala/Extension.scala`
 
+* Can you derive a monad for `R` relative to a monad `M`? What about `MonadPlus`.
+* Can you create an instance of _relative monad_ for `Future` relative to `Result`?
 * Can you implement `tMap`?
 * Implement `rAsk` and `rLocal`
 * Can you create an instance of a _relative monad_ for `FS` relative to `Reader FilePath`?

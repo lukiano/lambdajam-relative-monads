@@ -18,7 +18,10 @@ library
                   RelMonad
                   RelResult
                   FS
-                  RelReader
+                  MonadResult
+                  ResultT
+                  FST
+                  Extension
 
   default-extensions:
                      MultiParamTypeClasses
@@ -27,7 +30,8 @@ library
   build-depends:
       base       >= 4.7
     , directory  >= 1.2
-    , mtl        >= 2.2
+    , mtl        >= 2.1
+    , transformers >= 0.3
     , QuickCheck >= 2.0
     , doctest >= 0.9.7
   ghc-options: -O2 -Wall

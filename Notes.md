@@ -22,9 +22,6 @@ Timing
 Fixes
 -----
 
-* Replace `rOnException` with a version that uses `rFlatMap` in Haskell.
-* Add `rFlatMap` to `RelMonad`.
-* Move `tMap` into an extensions exercise file.
 * Tidy up `FS.hs`.
 * Create `src/help/RelMonad.hs`
 

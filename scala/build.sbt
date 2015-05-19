@@ -1,4 +1,4 @@
-//   Copyright 2014 Commonwealth Bank of Australia
+//   Copyright 2015 Commonwealth Bank of Australia
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -20,9 +20,6 @@ scalacOptions ++= Seq(
   "-deprecation",
   "-unchecked",
   "-Xlint",
-  "-Ywarn-dead-code",
-  "-Ywarn-value-discard",
-  "-Ywarn-unused-import",
   "-feature",
   "-language:_",
   "-target:jvm-1.7"

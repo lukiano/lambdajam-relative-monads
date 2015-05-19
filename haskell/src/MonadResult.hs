@@ -2,8 +2,6 @@ module MonadResult where
 import Control.Monad.Trans.Reader (ReaderT(..), runReaderT)
 import Control.Monad.Trans (lift)
 import ResultT
-import Result
-
 
 class (Monad m) => MonadResult m where
   raiseError  :: String -> m a
@@ -16,10 +14,6 @@ instance (Monad m) => MonadResult (ResultT m) where
 instance (MonadResult m) => MonadResult (ReaderT r m) where
   raiseError  = lift . raiseError
   handleError a f = ReaderT $ \r -> handleError (runReaderT a r) (\e -> runReaderT (f e) r)
-
--- Not sure if this can be implemented
-tMap :: MonadResult m => (Result a -> Result b) -> m a -> m b
-tMap = undefined
 
 tSetMessage :: MonadResult m => String -> m a -> m a
 tSetMessage message x = handleError x (const (raiseError message))

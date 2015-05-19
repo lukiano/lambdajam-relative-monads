@@ -12,9 +12,13 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-package lambdajam
+package lambdajam.help
 
-import org.specs2.{ScalaCheck, Specification}
-import org.specs2.matcher.ThrownExpectations
+trait RelMonad[M[_], R[_]]{
+  def rPoint[A](v: => M[A]): R[A]
+  def rBind[A, B](ma: R[A])(f: M[A] => M[R[B]]): R[B]
+}
 
-abstract class Test extends Specification with ThrownExpectations with ScalaCheck {}
+object RelMonad {
+  @inline def apply[M[_], R[_]](implicit RM: RelMonad[M, R]): RelMonad[M, R] = RM
+}

@@ -9,7 +9,7 @@ class RelMonad m r where
     (>%=)  :: r a -> (m a -> m (r b)) -> r b
 
 rMap :: (Monad m, RelMonad m r) => (m a -> m b) -> r a -> r b
-rMap f r = r >%= \x -> return (retRel (f x))
+rMap f r = undefined
 
 rFlatMap :: (Monad m, RelMonad m r) => (m a -> r b) -> r a -> r b
-rFlatMap f r = r >%= return . f
+rFlatMap f r = undefined
