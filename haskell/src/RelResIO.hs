@@ -1,7 +1,7 @@
-{-# LANGUAGE MultiParamTypeClasses, FlexibleContexts, TypeSynonymInstances, FlexibleInstances, 
-      ScopedTypeVariables #-}
-{-# OPTIONS_GHC -fno-warn-orphans #-}
+-- The following may be needed for doctests.
+{-# LANGUAGE MultiParamTypeClasses, FlexibleContexts, FlexibleInstances, ScopedTypeVariables #-}
 
+{-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module RelResIO where
 import           Control.Exception (SomeException, catch, catches, throwIO, ErrorCall(ErrorCall), SomeException, displayException, Handler(Handler))
@@ -13,21 +13,13 @@ import           RelResult
 import Data.IORef
 
 import Control.Monad (liftM)
-    
-    
--- import Test.QuickCheck
--- import Test.QuickCheck.Function
+        
 import Test.QuickCheck.Gen
 import Test.QuickCheck.Arbitrary    
 import Test.QuickCheck.Monadic
 
---import Test.ClassLaws.TestingState    
-    
 -- $setup
---
 -- >>> :set -XFlexibleContexts -XScopedTypeVariables
--- >>> import Test.QuickCheck
--- >>> import Test.QuickCheck.Monadic
 
 
 instance RelMonad R.Result IO where
@@ -48,11 +40,11 @@ instance RelMonad R.Result IO where
 newtype IOArb a = MkIOArb { unIOArb :: IO a }
     
 instance Show (IOArb a) where
-    show x = "<Hidden-IOArb>"                          
+    show _ = "<Hidden-IOArb>"                          
 
 
 instance Show (b -> IOArb a) where
-    show x = "<Hidden-FunIOArb>"                          
+    show _ = "<Hidden-FunIOArb>"                          
              
 genIOArbStepFail :: (Arbitrary a, CoArbitrary a, Show a) => Gen (IORef Int -> a -> IO a)
 genIOArbStepFail =

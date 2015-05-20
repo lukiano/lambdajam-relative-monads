@@ -8,6 +8,9 @@ import Result (Result, success)
 import FS (handleResult)
 import MonadResult
 
+-- $setup
+-- :set -XFlexibleContexts -XScopedTypeVariables
+
 type FST = ReaderT FilePath (ResultT IO)
        
 tfs :: (FilePath -> IO (Result a)) -> FST a

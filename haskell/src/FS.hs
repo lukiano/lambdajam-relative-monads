@@ -1,4 +1,6 @@
-{-# LANGUAGE MultiParamTypeClasses, FlexibleContexts, TypeSynonymInstances, FlexibleInstances, ScopedTypeVariables #-}
+-- The following may be needed for doctests.
+{-# LANGUAGE MultiParamTypeClasses, FlexibleContexts, FlexibleInstances, ScopedTypeVariables #-}
+
 module FS where
 import           System.Directory
 import           Control.Exception (SomeException, catch)
@@ -13,8 +15,6 @@ import           System.IO.Unsafe
 
 -- $setup
 -- >>> :set -XFlexibleContexts -XScopedTypeVariables
--- >>> import Test.QuickCheck
--- >>> import Test.QuickCheck.Monadic
         
 data FS a = FS { runFS :: FilePath -> IO (Result a) }
             deriving (Show, Eq) -- Just for testing
@@ -47,7 +47,6 @@ testPath = undefined
                               
 
 --------------FS Error handling functions---------------------------------------
-mapResult fs f = flatMapResult fs (>>= f)  
 mapResult :: (Result a -> Result b) -> FS a -> FS b
 mapResult f fs = FS $ \cwd -> f <$> (runFS fs cwd)
 

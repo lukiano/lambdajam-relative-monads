@@ -1,15 +1,16 @@
+-- The following may be needed for doctests.
+{-# LANGUAGE MultiParamTypeClasses, FlexibleContexts, FlexibleInstances, ScopedTypeVariables #-}
 {-# LANGUAGE DeriveGeneric #-}
 
 module Result where
+
 import Control.Applicative
 import Control.Monad (liftM, ap)
 import Control.Monad.Trans
 import Test.QuickCheck.Arbitrary    
 import Test.QuickCheck.Gen
-import GHC.Generics
+import GHC.Generics    
     
--- import Test.ClassLaws
-
 ----------------------------------------------------------------------------------------------------
 data Result a = Success a
               | Failure String
@@ -27,9 +28,6 @@ instance Monad Result where
   (Success a) >>= f = f a
   (Failure s) >>= _ = failure s
 
--- $setup
--- import Test.QuickCheck
-
 instance Arbitrary a => Arbitrary (Result a) where 
     arbitrary = frequency [(1, fmap Failure arbitrary), (4, fmap Success arbitrary)]          
 
@@ -38,7 +36,7 @@ instance CoArbitrary a => CoArbitrary (Result a)
     
 -- | Creates a successful result
 --
--- prop> success a == Success a
+-- prop> success a == Result.Success a
 success :: a -> Result a
 success = Success
 
@@ -61,8 +59,8 @@ setMessage msg = result success (const (failure msg))
 
 -- | Set error message
 --
--- >>> addMessage "error " (failure "other")
--- Failure "error other"
+-- >>> addMessage "error" (failure "other")
+-- Failure "errorother"
 addMessage :: String -> Result a -> Result a
 addMessage msg = result success (failure . (msg ++))
 

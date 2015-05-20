@@ -1,9 +1,14 @@
-{-# LANGUAGE FlexibleContexts #-}
+-- The following may be needed for doctests.
+{-# LANGUAGE MultiParamTypeClasses, FlexibleContexts, FlexibleInstances, ScopedTypeVariables #-}
 
 module RelResult where
 import Result
 import RelMonad
 
+-- $setup
+-- >>> import Test.QuickCheck
+-- >>> :set -XFlexibleContexts -XScopedTypeVariables
+    
 ----------------------------------------------------------------------------------------------------
 
 -- | Set the error message in a failure case. Useful for providing contextual information without

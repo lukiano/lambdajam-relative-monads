@@ -1,13 +1,14 @@
-{-# LANGUAGE MultiParamTypeClasses, FlexibleContexts, ScopedTypeVariables, TypeFamilies #-}
+-- The following may be needed for doctests.
+{-# LANGUAGE MultiParamTypeClasses, FlexibleContexts, FlexibleInstances, ScopedTypeVariables #-}
+
 module RelMonad where
 import Test.QuickCheck
 import Test.QuickCheck.Function
 import Test.QuickCheck.Gen    
 import Test.QuickCheck.Monadic
--- $setup
---
--- >>> :set -XMultiParamTypeClasses -XFlexibleContexts -XScopedTypeVariables
 
+-- $setup
+-- >>> :set -XMultiParamTypeClasses -XFlexibleContexts -XScopedTypeVariables 
 
 infix 1 >%=
 
@@ -31,7 +32,7 @@ rMonIdRProp _ x = do x1 <- run $ x
     where returnMR = return :: r a -> m (r a)         
 
                      
-rMonIdLProp :: forall m r a b. (Monad m, Monad r, RelMonad m r, Eq b) =>
+rMonIdLProp :: forall m r a b. (Monad m, Monad r, RelMonad m r, Eq b) => 
                m a -> (m a -> r b) -> PropertyM r ()
 rMonIdLProp (x :: m a) (f :: m a -> r b) =
     do lhs <- run $ retRel x >%= (returnMRb . f)
@@ -47,5 +48,4 @@ rMonAssocProp rx f g =
        rhs <- run $ rx >%= (\mx -> returnMRc (f mx >%= g))
        assert (lhs == rhs)
     where returnMRb = return :: r b -> m (r b) -- Not required, but informative
-          returnMRc = return :: r c -> m (r c)
-              
+          returnMRc = return :: r c -> m (r c)              

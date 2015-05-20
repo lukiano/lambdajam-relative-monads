@@ -20,12 +20,18 @@ library
     RelResult
     Result
     ResultT
-                  RelResIO
+    RelResIO
 
   default-extensions:
     MultiParamTypeClasses
     FlexibleContexts
-
+    FlexibleInstances
+    DeriveGeneric
+    TypeSynonymInstances
+    ScopedTypeVariables
+    RankNTypes                    
+    TypeFamilies        
+    
   build-depends:
       base         >= 4.7
     , directory    >= 1.2
@@ -33,13 +39,14 @@ library
     , mtl          >= 2.1
     , QuickCheck   >= 2.0
     , transformers >= 0.3
-    
 
   ghc-options:
     -Wall
     -fno-warn-unused-binds
     -fno-warn-unused-do-bind
     -fno-warn-unused-imports
+    -fno-warn-orphans
+    
 
 test-suite doctests
   type: exitcode-stdio-1.0
