@@ -151,29 +151,28 @@ instance RelMonad Result FS where
     let applied = (f <$> (runFS fs cwd)) -- x :: IO (Result (FS b))
     in applied >>= result (\s -> runFS s cwd) (return . Failure)
 
--- Testing the three monad laws
---     Still needs to adapt monadicIO from QuickCheck.Monadic
-
+-- | Tests for "syntax" functions derived via  'RelMonad Result FS'
 --
--- prop> \(arb1::R.Result String) (arb2::FS String) -> monadicIO $ rMonIdRProp arb1 (unIOArb arb2)
-
--- 
--- prop> \(arb1::R.Result String) (arb2::R.Result String -> FS String) -> monadicIO $ rMonIdLProp arb1 ((unIOArb . arb2))
-
--- 
--- prop> \(arb1::IOArb String) (arb2::R.Result String -> FS String) (arb3::R.Result String -> FS String) -> monadicIO $ rMonAssocProp (unIOArb arb1) (unIOArb . arb2) (return . unIOArb . arb3)
+-- prop> rSetMessage "error" (rFailure "other") == (rFailure "error" :: FS String)
+-- prop> rSetMessage "error" (return "other")   == (return "other" :: FS String)
+--       
+-- prop> addMessage "error" (rFailure "other") == (rFailure "errorother" :: FS String)
+-- prop> addMessage "error" (return "other") == (return "other")
+--
+-- prop> (rFailure "error") `rOr` (return "other") == (return "other" :: FS String)
+-- prop> (return "can") `rOr` (return "other") == (return "can" :: FS String)
+-- prop> (rFailure "error") `rOr` (rFailure "other") == (rFailure "other" :: FS String)
+--
+-- prop> refMkSetViaFSCheck (\fsSet -> (rFailure "cleanup!") `onException` fsSet :: FS String)
+-- prop> (rFailure "cleanup!") `onException` (return "not") == (rFailure "cleanup!" :: FS String)
+--
+-- prop> refMkSetViaFSCheck (\fsSet -> (rFailure "notok") `rFinally` fsSet :: FS String)
+-- prop> refMkSetViaFSCheck (\fsSet -> (return "ok") `rFinally` fsSet  :: FS String)
+-- prop> (rFailure "notok") `finally` (return "justdoit") == (rFailure "notok" :: FS String)
+-- prop> (return "ok") `finally` (return "justdoit") == (return "ok" :: FS String)
+--                              
+-- prop> refMkSetViaFSCheck (\fsSet -> rBracket (return "init") (\ _ -> rFailure "notok" :: FS String) (\ _ -> fsSet))
+-- prop> refMkSetViaFSCheck (\fsSet -> rBracket (return "init") (\ _ -> return "ok" :: FS String) (\ _ -> fsSet))
         
-
--- Testing the three monad laws
---     xStill needs to adapt monadicIO from QuickCheck.Monadic
-
---
--- prop> \(arb1::R.Result String) (arb2::FS String) -> monadicIO $ rMonIdRProp arb1 (unIOArb arb2)
-
--- 
--- prop> \(arb1::R.Result String) (arb2::R.Result String -> FS String) -> monadicIO $ rMonIdLProp arb1 ((unIOArb . arb2))
-
--- 
--- prop> \(arb1::IOArb String) (arb2::R.Result String -> FS String) (arb3::R.Result String -> FS String) -> monadicIO $ rMonAssocProp (unIOArb arb1) (unIOArb . arb2) (return . unIOArb . arb3)
 
 

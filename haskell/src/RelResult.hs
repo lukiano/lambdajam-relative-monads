@@ -8,7 +8,7 @@ import RelMonad
 -- $setup
 -- >>> import Test.QuickCheck
 -- >>> :set -XFlexibleContexts -XScopedTypeVariables
-    
+
 ----------------------------------------------------------------------------------------------------
 
 -- | Set the error message in a failure case. Useful for providing contextual information without
@@ -54,10 +54,11 @@ rBracket before after during = do
   return c
 
          
-rSuccess :: (RelMonad Result r) => a -> r a
-rSuccess x = retRel (Success x)
-
+-- | A direct implementation of failure, handy for tests.
 rFailure :: (RelMonad Result r) => String -> r a
 rFailure msg = retRel (Failure msg)
-               
+
+-- | A direct implementation of success.
+rSuccess :: (RelMonad Result r) => a -> r a
+rSuccess x = retRel (Success x)
             
