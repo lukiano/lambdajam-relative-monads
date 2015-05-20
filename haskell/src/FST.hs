@@ -5,15 +5,16 @@ import Control.Exception (catch)
 import System.Directory (getDirectoryContents)
 import ResultT (ResultT(..))
 import Result (Result, success)
-import FS (handleResult)
+import FS (handleError)
 
 type FST = ReaderT FilePath (ResultT IO)
        
 tfs :: (FilePath -> IO (Result a)) -> FST a
-tfs f = ReaderT $ \r -> ResultT (f r)
-
-tLS :: FST [FilePath]
-tLS = tfs $ \cwd -> catch (success <$> getDirectoryContents cwd) handleResult
+tfs = undefined
 
 runFST :: FST a -> FilePath -> IO (Result a)
-runFST a cwd = runResultT $ runReaderT a cwd
+runFST = undefined
+
+tLS :: FST [FilePath]
+tLS = undefined
+

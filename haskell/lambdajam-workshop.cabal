@@ -28,13 +28,19 @@ library
                      FlexibleContexts
                   
   build-depends:
-      base       >= 4.7
-    , directory  >= 1.2
-    , mtl        >= 2.1
-    , transformers >= 0.3
-    , QuickCheck >= 2.0
-    , doctest >= 0.9.7
-  ghc-options: -O2 -Wall
+                base       >= 4.7
+              , directory  >= 1.2
+              , mtl        >= 2.1
+              , transformers >= 0.3
+              , QuickCheck >= 2.0
+              , doctest >= 0.9.7
+              
+  ghc-options: -O2 
+               -Wall
+               -fno-warn-unused-binds
+               -fno-warn-unused-do-bind
+               -fno-warn-unused-imports
+               
   ghc-prof-options: -fprof-auto -rtsopts
 
 test-suite            doctests
