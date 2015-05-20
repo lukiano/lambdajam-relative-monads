@@ -98,16 +98,13 @@ Exercises
    undefined error handling functions  and `ls` in `src/main/scala/FS.scala`.
 3. Lets now abstract the common error handling functionality using _relative monads_ in particular a
    relative monad to `Result`.
-  1. First we need a definition of a `relative monad` so copy the `RelMonad` class from
-     `src/main/scala/help/RelMonad.scala` to `src/main/scala/RelMonad.scala` or if you are up for a challenge define your own 
-     `RelMonad` class. A _relative monad_ needs:
+  1. See `src/main/scala/RelMonad.scala` for the relative monad type class. A _relative monad_ needs:
     * a relative return lifting the monad it is relative to into the target context
     * and, a relative bind allowing functions to map across the monad it is relative to in the
       context of the larger monad. Different formulations of relative bind are possible.
-  2. To help us later implement `rMap` and `rFlatMap` in `src/main/scala/RelMonad.scala`.
-  3. Now lets add the error handling. Implement the undefined functions in `src/main/scala/RelResult.scala`.
-  4. To apply it to `FS` implement an instance of `RelMonad` of `FS` relative to `Result` in `src/main/scala/FS.scala`.
-  5. In order to use it implement `rLS` in `src/main/scala/FS.scala` using the `RelResult` functions instead of
+  2. Now lets add the error handling. Implement the undefined functions in `src/main/scala/RelResult.scala`.
+  3. To apply it to `FS` implement an instance of `RelMonad` of `FS` relative to `Result` in `src/main/scala/FS.scala`.
+  4. In order to use it implement `rLS` in `src/main/scala/FS.scala` using the `RelResult` functions instead of
      the `FS` specific functions.
 4. Lets now do the same thing using the _mtl_ functionality from Scalaz.
   1. First we need a `ResultT` so implement the undefined functions in `src/main/scala/ResultT.scala`.

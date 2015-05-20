@@ -61,9 +61,6 @@ final class MonadResultOps[M[_], A](val self: M[A])(implicit M: MonadResult[M]) 
 
   def handleError(f: String => M[A]): M[A] = M.handleError(self)(f)
 
-  // Not sure if this can be implemented
-  def tMap[B](f: Result[A] => Result[B]): M[B] = ???
-
   /**
     * Set the error message in a failure case. Useful for providing contextual information without
     * having to inspect result.
