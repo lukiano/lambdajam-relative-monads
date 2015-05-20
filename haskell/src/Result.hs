@@ -1,3 +1,4 @@
+{-# LANGUAGE DeriveGeneric #-}
 
 module Result where
 import Control.Applicative
