@@ -25,6 +25,11 @@ object FST extends KleisliFunctions {
   def ok[A](a: => A)                         = Monad[FST].point(a)
   def error[A](e: String): FST[A]            = MonadResult.error[FST, A](e)
 
+  def listFiles: FST[List[String]] = apply(f => Result.safeNull(f.list).map(_.toList))
+
+  /** List files but with a nice error message using MonadResult functions. */
+  def ls: FST[List[String]] = listFiles.tSetMessage("Invalid path")
+
   implicit def FSTMonadResultOps[A](v: FST[A]): MonadResultOps[FST, A] =
     new MonadResultOps[FST, A](v)
 }

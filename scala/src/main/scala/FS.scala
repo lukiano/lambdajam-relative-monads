@@ -19,6 +19,8 @@ import java.io.File
 import scalaz.Monad
 
 case class FS[A](runFS: File => Result[A]) {
+  def runPath(s: String): Result[A] = runFS(new File(s))
+
   def map[B](f: A => B): FS[B] =
     flatMap(f.andThen(FS.fs(_)))
 
@@ -90,6 +92,12 @@ case class FS[A](runFS: File => Result[A]) {
 object FS extends ToRelResultOps {
   def fs[A](a: => A): FS[A] = FS(_ => Result.safe(a))
 
+  /** Lists the files in a directory but doesn't have a nice error message. */
+  def listFiles: FS[List[String]] = FS(f => Result.safeNull(f.list).map(_.toList))
+
+  /** List files but with a nice error message. */
+  def ls: FS[List[String]] = listFiles.setMessage("Invalid path")
+
   implicit def FSMonad: Monad[FS] = new Monad[FS] {
     def point[A](v: => A) = fs(v)
     def bind[A, B](a: FS[A])(f: A => FS[B]) = a.flatMap(f)
@@ -104,5 +112,6 @@ object FS extends ToRelResultOps {
       FS(x => f(ma.runFS(x)).fold(r => r.runFS(x), e => Result.error(e)))
   }
 
-
+  /** List files but with a nice error message using RelResult functions. */
+  def rLS: FS[List[String]] = listFiles.rSetMessage("Invalid path")
 }

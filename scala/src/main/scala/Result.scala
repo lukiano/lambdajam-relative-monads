@@ -106,6 +106,9 @@ object Result {
   def safe[A](thunk: => A): Result[A] =
     try ok(thunk) catch { case NonFatal(t) => error(t.getMessage) }
 
+  /** Exception and null safe `Result` creation. */
+  def safeNull[A](thunk: => A): Result[A] =
+    safe(thunk).flatMap(a => if (a == null) Result.error("Got null") else Result.ok(a))
   /**
     * Smart constructor for a successful `Result`. Provides better inference then direct use of
     * constructor. */
