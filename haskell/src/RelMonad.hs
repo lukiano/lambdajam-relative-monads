@@ -1,5 +1,3 @@
-{-# LANGUAGE MultiParamTypeClasses, FlexibleContexts #-}
-
 module RelMonad where
 
 infix 1 >%=

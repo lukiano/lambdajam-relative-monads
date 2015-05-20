@@ -1,5 +1,3 @@
-{-# LANGUAGE MultiParamTypeClasses, FlexibleContexts, TypeSynonymInstances, FlexibleInstances #-}
-
 module FS where
 import           System.Directory
 import           Control.Exception (SomeException, catch)

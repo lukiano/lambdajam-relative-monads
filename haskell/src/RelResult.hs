@@ -1,5 +1,3 @@
-{-# LANGUAGE FlexibleContexts #-}
-
 module RelResult where
 import Result
 import RelMonad
