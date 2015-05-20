@@ -39,9 +39,7 @@ Exercises
    undefined error handling functions  and `ls` in `src/FS.hs`.
 3. Lets now abstract the common error handling functionality using _relative monads_ in particular a
    relative monad to `Result`.
-  1. First we need a definition of a `relative monad` so copy the `RelMonad` class from
-     `src/help/RelMonad.hs-help` to `src/RelMonad.hs` or if you are up for a challenge define your own 
-     `RelMonad` class. A _relative monad_ needs:
+  1. See `src/RelMonad.hs` for the relative monad type class. A _relative monad_ needs:
     * a relative return lifting the monad it is relative to into the target context
     * and, a relative bind allowing functions to map across the monad it is relative to in the
       context of the larger monad. Different formulations of relative bind are possible.
