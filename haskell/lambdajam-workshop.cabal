@@ -4,7 +4,7 @@ license:             AllRightsReserved
 author:              Stephan Hoermann
 maintainer:          stephan.hoermann@cba.com.au
 category:            Stats
-build-type:          Simple
+build-type:          Custom
 cabal-version:       >=1.10
 
 
