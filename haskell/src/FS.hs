@@ -157,19 +157,19 @@ instance RelMonad Result FS where
 -- prop> rSetMessage "error" (return "other")   == (return "other" :: FS String)
 --       
 -- prop> addMessage "error" (rFailure "other") == (rFailure "errorother" :: FS String)
--- prop> addMessage "error" (return "other") == (return "other")
+-- prop> addMessage "error" (return "other")   == (return "other")
 --
--- prop> (rFailure "error") `rOr` (return "other") == (return "other" :: FS String)
--- prop> (return "can") `rOr` (return "other") == (return "can" :: FS String)
+-- prop> (rFailure "error") `rOr` (return "other")   == (return "other" :: FS String)
+-- prop> (return "can") `rOr` (return "other")       == (return "can" :: FS String)
 -- prop> (rFailure "error") `rOr` (rFailure "other") == (rFailure "other" :: FS String)
 --
--- prop> refMkSetViaFSCheck (\fsSet -> (rFailure "cleanup!") `onException` fsSet :: FS String)
--- prop> (rFailure "cleanup!") `onException` (return "not") == (rFailure "cleanup!" :: FS String)
+-- prop> refMkSetViaFSCheck (\fsSet -> (rFailure "cleanup!") `rOnException` fsSet :: FS String)
+-- prop> (rFailure "cleanup!") `rOnException` (return "not") == (rFailure "cleanup!" :: FS String)
 --
 -- prop> refMkSetViaFSCheck (\fsSet -> (rFailure "notok") `rFinally` fsSet :: FS String)
 -- prop> refMkSetViaFSCheck (\fsSet -> (return "ok") `rFinally` fsSet  :: FS String)
--- prop> (rFailure "notok") `finally` (return "justdoit") == (rFailure "notok" :: FS String)
--- prop> (return "ok") `finally` (return "justdoit") == (return "ok" :: FS String)
+-- prop> (rFailure "notok") `rFinally` (return "justdoit") == (rFailure "notok" :: FS String)
+-- prop> (return "ok") `rFinally` (return "justdoit")      == (return "ok" :: FS String)
 --                              
 -- prop> refMkSetViaFSCheck (\fsSet -> rBracket (return "init") (\ _ -> rFailure "notok" :: FS String) (\ _ -> fsSet))
 -- prop> refMkSetViaFSCheck (\fsSet -> rBracket (return "init") (\ _ -> return "ok" :: FS String) (\ _ -> fsSet))
