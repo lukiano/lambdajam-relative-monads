@@ -150,3 +150,30 @@ instance RelMonad Result FS where
   fs >%= f = FS $ \cwd ->
     let applied = (f <$> (runFS fs cwd)) -- x :: IO (Result (FS b))
     in applied >>= result (\s -> runFS s cwd) (return . Failure)
+
+-- Testing the three monad laws
+--     Still needs to adapt monadicIO from QuickCheck.Monadic
+
+--
+-- prop> \(arb1::R.Result String) (arb2::FS String) -> monadicIO $ rMonIdRProp arb1 (unIOArb arb2)
+
+-- 
+-- prop> \(arb1::R.Result String) (arb2::R.Result String -> FS String) -> monadicIO $ rMonIdLProp arb1 ((unIOArb . arb2))
+
+-- 
+-- prop> \(arb1::IOArb String) (arb2::R.Result String -> FS String) (arb3::R.Result String -> FS String) -> monadicIO $ rMonAssocProp (unIOArb arb1) (unIOArb . arb2) (return . unIOArb . arb3)
+        
+
+-- Testing the three monad laws
+--     xStill needs to adapt monadicIO from QuickCheck.Monadic
+
+--
+-- prop> \(arb1::R.Result String) (arb2::FS String) -> monadicIO $ rMonIdRProp arb1 (unIOArb arb2)
+
+-- 
+-- prop> \(arb1::R.Result String) (arb2::R.Result String -> FS String) -> monadicIO $ rMonIdLProp arb1 ((unIOArb . arb2))
+
+-- 
+-- prop> \(arb1::IOArb String) (arb2::R.Result String -> FS String) (arb3::R.Result String -> FS String) -> monadicIO $ rMonAssocProp (unIOArb arb1) (unIOArb . arb2) (return . unIOArb . arb3)
+
+

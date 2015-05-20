@@ -40,7 +40,7 @@ Exercises
 3. Lets now abstract the common error handling functionality using _relative monads_ in particular a
    relative monad to `Result`.
   1. First we need a definition of a `relative monad` so copy the `RelMonad` class from
-     `src/help/RelMonad.hs` to `src/RelMonad.hs` or if you are up for a challenge define your own 
+     `src/help/RelMonad.hs-help` to `src/RelMonad.hs` or if you are up for a challenge define your own 
      `RelMonad` class. A _relative monad_ needs:
     * a relative return lifting the monad it is relative to into the target context
     * and, a relative bind allowing functions to map across the monad it is relative to in the
