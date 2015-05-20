@@ -12,6 +12,8 @@ time left at the end there are some additional exercises to further explore the 
 This workshop is available in both Haskell and Scala, please go to the corresponding section for 
 your language of choice.
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/CommBank/lambdajam-relative-monads?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 Haskell
 =======
 
