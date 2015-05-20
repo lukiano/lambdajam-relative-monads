@@ -34,10 +34,9 @@ object MonadResult extends KleisliFunctions {
   trait ReaderTMonadResult[F[_], R] extends MonadResult[({ type λ[α] = ReaderT[F, R, α] })#λ] {
     implicit def M: MonadResult[F]
 
-    def raiseError[A](e: String): ReaderT[F, R, A] = kleisli(_ => M.raiseError(e))
+    def raiseError[A](e: String): ReaderT[F, R, A] = ???
 
-    def handleError[A](ma: ReaderT[F, R, A])(f: String => ReaderT[F, R, A]): ReaderT[F, R, A] =
-      kleisli(r => M.handleError(ma.run(r))(x => f(x).run(r)))
+    def handleError[A](ma: ReaderT[F, R, A])(f: String => ReaderT[F, R, A]): ReaderT[F, R, A] = ???
 
     def point[A](a: => A): ReaderT[F, R, A] = kleisli(_ => M.point(a))
 
@@ -45,9 +44,9 @@ object MonadResult extends KleisliFunctions {
   }
 
   implicit def resultMonadResult: MonadResult[Result] = new MonadResult[Result] {
-    def raiseError[A](e: String): Result[A] = Result.error(e)
+    def raiseError[A](e: String): Result[A] = ???
 
-    def handleError[A](ma: Result[A])(f: String => Result[A]): Result[A] = ma.fold(Result.ok, f)
+    def handleError[A](ma: Result[A])(f: String => Result[A]): Result[A] = ???
 
     def point[A](a: => A): Result[A] = Result.ok(a)
 
@@ -67,23 +66,21 @@ final class MonadResultOps[M[_], A](val self: M[A])(implicit M: MonadResult[M]) 
     *
     * NB: This discards any existing message.
     */
-  def tSetMessage(message: String): M[A] = handleError(_ => M.raiseError(message))
+  def tSetMessage(message: String): M[A] = ???
 
   /**
     * Adds an additional error message. Useful for adding more context as the error goes up the stack.
     *
     * The new message is prepended to any existing message.
     */
-  def tAddMessage(message: String, separator: String = ": "): M[A] = 
-    handleError(m => M.raiseError(s"${message}${separator}$m"))
+  def tAddMessage(message: String, separator: String = ": "): M[A] = ???
 
   /**
     * Like "finally", but only performs the final action if there was an error.
     *
     * If `action` fails that error is swallowed and only the initial error is returned.
     */
-  def tOnException[B](action: M[B]): M[A] =
-    handleError(e => action.handleError(_ => M.raiseError(e)) >> M.raiseError(e))
+  def tOnException[B](action: M[B]): M[A] = ???
 
   /**
     * Ensures that the provided action is always run regardless of if `this` was successful.
@@ -92,21 +89,14 @@ final class MonadResultOps[M[_], A](val self: M[A])(implicit M: MonadResult[M]) 
     * If `self` was successful and `sequel` fails it returns the failure from `sequel`. Otherwise
     * the result of `self` is returned.
     */
-  def tEnsure[B](sequel: M[B]): M[A] = for {
-    r <- tOnException(sequel)
-    _ <- sequel
-  } yield r
+  def tEnsure[B](sequel: M[B]): M[A] = ???
   
-
   /**
     * Applies the "during" action, calling "after" regardless of whether there was an error.
     *
     * All errors are rethrown. Generalizes try/finally.
     */
-  def tBracket[B, C](after: A => M[B])(during: A => M[C]): M[C] = for {
-    a <- self
-    r <- during(a) tEnsure after(a)
-  } yield r
+  def tBracket[B, C](after: A => M[B])(during: A => M[C]): M[C] = ???
 }
 
 trait ToMonadResultOps {
