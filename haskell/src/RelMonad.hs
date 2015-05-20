@@ -10,7 +10,7 @@ import Test.QuickCheck.Monadic
 -- $setup
 -- >>> :set -XMultiParamTypeClasses -XFlexibleContexts -XScopedTypeVariables 
 
-infix 1 >%=
+infixl 1 >%=
 
 class RelMonad m r where
     retRel :: m a -> r a
