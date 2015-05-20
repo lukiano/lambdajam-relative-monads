@@ -10,8 +10,6 @@ import Test.QuickCheck.Monadic
 
 
 infix 1 >%=
-    
-infix 1 >%=
 
 class RelMonad m r where
     retRel :: m a -> r a

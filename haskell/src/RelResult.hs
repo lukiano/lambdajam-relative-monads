@@ -46,6 +46,10 @@ rBracket before after during = do
   c <- rFinally (during a) (after a)
   return c
 
+         
+rSuccess :: (RelMonad Result r) => a -> r a
+rSuccess x = retRel (Success x)
+
 rFailure :: (RelMonad Result r) => String -> r a
 rFailure msg = retRel (Failure msg)
                

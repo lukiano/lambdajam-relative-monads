@@ -9,12 +9,15 @@ import qualified Result as R
 import           RelMonad
 import           RelResult
 
--- Slight hack, a newtype would be better.    
-instance Show (a -> IO b) where
-    show x = "<Hidden-FunIO-Arg>"
-    
-data FS a = FS { runFS :: FilePath -> IO (Result a) } deriving Show
-          
+import           System.IO.Unsafe    
+
+-- $setup
+-- >>> :set -XFlexibleContexts -XScopedTypeVariables
+-- >>> import Test.QuickCheck
+-- >>> import Test.QuickCheck.Monadic
+        
+data FS a = FS { runFS :: FilePath -> IO (Result a) }
+            deriving (Show, Eq) -- Just for testing
 
 instance Functor FS where
   fmap = liftM
@@ -31,42 +34,53 @@ instance Monad FS where
       inner cwd (Success a) = runFS (f a) cwd
       inner _   (Failure s) = return (failure s)
 
+-- Print via unsafePerformIO, just for testing!
+instance Show a => Show (FilePath -> IO (Result a)) where
+    show f = show (unsafePerformIO (f undefined))
+
+-- Just for testing!
+instance Show a => Eq (FilePath -> IO (Result a)) where
+   f == g =  show f == show g
+                               
+testPath :: FilePath                  
+testPath = undefined
+                              
 
 --------------FS Error handling functions---------------------------------------
-
+mapResult fs f = flatMapResult fs (>>= f)  
 mapResult :: (Result a -> Result b) -> FS a -> FS b
 mapResult f fs = FS $ \cwd -> f <$> (runFS fs cwd)
-    
+
 -- | Set the error message in a failure case. Useful for providing contextual information without
 -- having to inspect result.
 -- NB: This discards any existing message.
-
--- -- prop> monadic $ do setMessage msg fs
--- --                   assert
-
--- $setup
--- >>> :set -XFlexibleContexts -XScopedTypeVariables
--- >>> import Test.QuickCheck
--- >>> import Test.QuickCheck.Monadic
-
----- | set a new error message on existing errors
 --
------ prop> monadic $ do setMessage msg fs
---                    assert
-
--- >>> flatMapResult (setMessage "error" (failure "other")) (\(Failure "error") -> True)
+-- >>> setMessage "error" (rFailure "other") == (rFailure "error" :: FS String)
 -- True
-
+-- >>> setMessage "error" (return "other") == (return "other")
+-- True
 setMessage :: String -> FS a -> FS a
 setMessage msg = mapResult (R.setMessage msg)
 
 -- | Adds an additional error message. Useful for adding more context as the error goes up the stack.
 -- The new message is prepended to any existing message.
+--
+-- >>> addMessage "error" (rFailure "other") == (rFailure "errorother" :: FS String)
+-- True
+-- >>> addMessage "error" (return "other") == (return "other")
+-- True
 addMessage :: String -> FS a -> FS a
 addMessage msg = mapResult (R.addMessage msg)
 
 -- | Runs the first operation. If it fails, runs the second operation. Useful for chaining optional operations.
 -- Returns the error of `self` iff both `self` and `other` fail.
+--
+-- >>> (rFailure "error") `FS.or` (return "other") == (return "other")
+-- True
+-- >>> (return "can") `FS.or` (return "other") == (return "can")
+-- True
+-- >>> (rFailure "error") `FS.or` (rFailure "other") == (rFailure "other" :: FS String)
+-- True
 or :: FS a -> FS a -> FS a
 or fs1 fs2 =  FS $ \cdw -> runFS fs1 cdw >>= result (const (runFS fs1 cdw)) (const (runFS fs2 cdw))
 
@@ -113,11 +127,6 @@ instance RelMonad Result FS where
     let applied = (f <$> (runFS fs cwd)) -- x :: IO (Result (FS b))
     in applied >>= result (\s -> runFS s cwd) (return . Failure)
 
--- | List files with a nicer error message using RelResult functions.
-rLS :: FS [FilePath]
-rLS = rSetMessage "Hello World" listFiles
--- >>> relLS
--- 
 -- Testing the three monad laws
 --     xStill needs to adapt monadicIO from QuickCheck.Monadic
 

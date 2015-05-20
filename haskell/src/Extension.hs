@@ -1,3 +1,5 @@
+{-# LANGUAGE MultiParamTypeClasses, FlexibleContexts, ScopedTypeVariables, TypeFamilies #-}
+
 module Extension where
 import Control.Monad.Reader
 import Result
