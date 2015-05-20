@@ -30,22 +30,19 @@ instance Monad FS where
 
 --------------FS Error handling functions---------------------------------------
 
-flatMapResult :: FS a -> (Result a -> Result b) -> FS b
-flatMapResult fs f = FS $ \cdw -> f <$> runFS fs cdw
-
-mapResult :: FS a -> (a -> Result b) -> FS b
-mapResult fs f = flatMapResult fs (>>= f)
+mapResult :: (Result a -> Result b) -> FS a -> FS b
+mapResult f fs = FS $ \cwd -> f <$> (runFS fs cwd)
 
 -- | Set the error message in a failure case. Useful for providing contextual information without
 -- having to inspect result.
 -- NB: This discards any existing message.
 setMessage :: String -> FS a -> FS a
-setMessage msg fs = flatMapResult fs (R.setMessage msg)
+setMessage msg = mapResult (R.setMessage msg)
 
 -- | Adds an additional error message. Useful for adding more context as the error goes up the stack.
 -- The new message is prepended to any existing message.
 addMessage :: String -> FS a -> FS a
-addMessage msg fs = flatMapResult fs (R.addMessage msg)
+addMessage msg = mapResult (R.addMessage msg)
 
 -- | Runs the first operation. If it fails, runs the second operation. Useful for chaining optional operations.
 -- Returns the error of `self` iff both `self` and `other` fail.
