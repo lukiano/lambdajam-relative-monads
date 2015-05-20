@@ -56,7 +56,7 @@ fsIOSuccess io = FS (\ _ -> io >>= return . Success)
 
 fsToIO (FS f) = f testPath
 
-
+-- | Test IO effects by creating an IORef, along with an FS that sets it, and a check.
 refMkSetViaFSCheck :: (FS () -> FS a) -> Bool                
 refMkSetViaFSCheck fsVia = unsafePerformIO $ do
                        r <- newIORef "oops"
