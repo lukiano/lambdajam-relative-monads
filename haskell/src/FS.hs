@@ -11,7 +11,10 @@ import qualified Result as R
 import           RelMonad
 import           RelResult
 
-import           System.IO.Unsafe    
+import           System.IO.Unsafe
+import
+    Data.IORef
+
 
 -- $setup
 -- >>> :set -XFlexibleContexts -XScopedTypeVariables
@@ -36,14 +39,30 @@ instance Monad FS where
 
 -- Print via unsafePerformIO, just for testing!
 instance Show a => Show (FilePath -> IO (Result a)) where
-    show f = show (unsafePerformIO (f undefined))
+    show f = show (unsafePerformIO (f testPath))
 
 -- Just for testing!
-instance Show a => Eq (FilePath -> IO (Result a)) where
-   f == g =  show f == show g
+instance Eq a => Eq (FilePath -> IO (Result a)) where
+   f == g =  unsafePerformIO (f testPath) == unsafePerformIO (g testPath)
                                
 testPath :: FilePath                  
 testPath = undefined
+
+fsFailure :: String -> FS a             
+fsFailure msg = FS (\ _ -> return (Failure msg))
+
+fsIOSuccess :: IO a -> FS a
+fsIOSuccess io = FS (\ _ -> io >>= return . Success)
+
+fsToIO (FS f) = f testPath
+
+
+refMkSetViaFSCheck :: (FS () -> FS a) -> Bool                
+refMkSetViaFSCheck fsVia = unsafePerformIO $ do
+                       r <- newIORef "oops"
+                       resFS <- fsToIO $ fsVia (fsIOSuccess(writeIORef r "did-it"))
+                       rStr <- readIORef r
+                       return (rStr == "did-it")              
                               
 
 --------------FS Error handling functions---------------------------------------
@@ -54,48 +73,54 @@ mapResult f fs = FS $ \cwd -> f <$> (runFS fs cwd)
 -- having to inspect result.
 -- NB: This discards any existing message.
 --
--- >>> setMessage "error" (rFailure "other") == (rFailure "error" :: FS String)
--- True
--- >>> setMessage "error" (return "other") == (return "other")
--- True
+-- prop> setMessage "error" (fsFailure "other") == (fsFailure "error" :: FS String)
+-- prop> setMessage "error" (return "other") == (return "other")
 setMessage :: String -> FS a -> FS a
 setMessage msg = mapResult (R.setMessage msg)
 
 -- | Adds an additional error message. Useful for adding more context as the error goes up the stack.
 -- The new message is prepended to any existing message.
 --
--- >>> addMessage "error" (rFailure "other") == (rFailure "errorother" :: FS String)
--- True
--- >>> addMessage "error" (return "other") == (return "other")
--- True
+-- prop> addMessage "error" (fsFailure "other") == (fsFailure "errorother" :: FS String)
+-- prop> addMessage "error" (return "other") == (return "other")
 addMessage :: String -> FS a -> FS a
 addMessage msg = mapResult (R.addMessage msg)
 
 -- | Runs the first operation. If it fails, runs the second operation. Useful for chaining optional operations.
 -- Returns the error of `self` iff both `self` and `other` fail.
 --
--- >>> (rFailure "error") `FS.or` (return "other") == (return "other")
--- True
--- >>> (return "can") `FS.or` (return "other") == (return "can")
--- True
--- >>> (rFailure "error") `FS.or` (rFailure "other") == (rFailure "other" :: FS String)
--- True
+-- prop> (rFailure "error") `FS.or` (return "other") == (return "other")
+-- prop> (return "can") `FS.or` (return "other") == (return "can")
+-- prop> (rFailure "error") `FS.or` (rFailure "other") == (rFailure "other" :: FS String)
 or :: FS a -> FS a -> FS a
 or fs1 fs2 =  FS $ \cdw -> runFS fs1 cdw >>= result (const (runFS fs1 cdw)) (const (runFS fs2 cdw))
 
 -- | Like "finally", but only performs the final action if there was an error.
 -- If `action` fails that error is swallowed and only the initial error is returned.
+--
+-- prop> refMkSetViaFSCheck (\fsSet -> (fsFailure "cleanup!") `onException` fsSet)
+-- prop> (fsFailure "cleanup!") `onException` (return "not") == (fsFailure "cleanup!")
 onException :: FS a -> FS b -> FS a
 onException  a sequel =  FS $ \cwd -> runFS a cwd >>= result (return . success) (\s -> (runFS sequel cwd) >> return (failure s))
 
 -- | Ensures that the provided action is always run regardless of if `this` was successful.
 -- If `self` was successful and `sequel` fails it returns the failure from `sequel`. Otherwise
 -- the result of `self` is returned.
+--
+-- prop> refMkSetViaFSCheck (\fsSet -> (fsFailure "notok") `finally` fsSet)
+-- prop> refMkSetViaFSCheck (\fsSet -> (return "ok") `finally` fsSet)
+-- prop> (fsFailure "notok") `finally` (return "justdoit") == (fsFailure "notok")
+-- prop> (return "ok") `finally` (return "justdoit") == (return "ok")
 finally :: FS a -> FS b -> FS a
-finally a sequel =  FS $ \cwd -> runFS a cwd >>= result (\x -> (runFS sequel cwd) >> return (success x)) (\s -> (runFS sequel cwd) >> return (failure s))
-  
+finally a sequel = FS $ \cwd -> runFS a cwd >>=
+                             result (\x -> (runFS sequel cwd) >> return (success x))
+                                    (\s -> (runFS sequel cwd) >> return (failure s))
+                              
 -- | Applies the "during" action, calling "after" regardless of whether there was an error.
 -- All errors are rethrown. Generalizes try/finally.
+--
+-- prop> refMkSetViaFSCheck (\fsSet -> bracket (return "init") (\ _ -> fsFailure "notok") (\ _ -> fsSet))
+-- prop> refMkSetViaFSCheck (\fsSet -> bracket (return "init") (\ _ -> return "ok") (\ _ -> fsSet))
 bracket :: FS a -> (a -> FS b) -> (a -> FS c) -> FS c
 bracket before after during = do
   a <- before
@@ -125,30 +150,3 @@ instance RelMonad Result FS where
   fs >%= f = FS $ \cwd ->
     let applied = (f <$> (runFS fs cwd)) -- x :: IO (Result (FS b))
     in applied >>= result (\s -> runFS s cwd) (return . Failure)
-
--- Testing the three monad laws
---     xStill needs to adapt monadicIO from QuickCheck.Monadic
-
---
--- prop> \(arb1::R.Result String) (arb2::FS String) -> monadicIO $ rMonIdRProp arb1 (unIOArb arb2)
-
--- 
--- prop> \(arb1::R.Result String) (arb2::R.Result String -> FS String) -> monadicIO $ rMonIdLProp arb1 ((unIOArb . arb2))
-
--- 
--- prop> \(arb1::IOArb String) (arb2::R.Result String -> FS String) (arb3::R.Result String -> FS String) -> monadicIO $ rMonAssocProp (unIOArb arb1) (unIOArb . arb2) (return . unIOArb . arb3)
-        
-
--- Testing the three monad laws
---     xStill needs to adapt monadicIO from QuickCheck.Monadic
-
---
--- prop> \(arb1::R.Result String) (arb2::FS String) -> monadicIO $ rMonIdRProp arb1 (unIOArb arb2)
-
--- 
--- prop> \(arb1::R.Result String) (arb2::R.Result String -> FS String) -> monadicIO $ rMonIdLProp arb1 ((unIOArb . arb2))
-
--- 
--- prop> \(arb1::IOArb String) (arb2::R.Result String -> FS String) (arb3::R.Result String -> FS String) -> monadicIO $ rMonAssocProp (unIOArb arb1) (unIOArb . arb2) (return . unIOArb . arb3)
-
-
