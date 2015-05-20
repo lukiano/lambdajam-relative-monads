@@ -20,7 +20,7 @@ Haskell
 Prerequisite
 ------------
 
-* GHC (tested on 7.10.1)
+* GHC (tested on 7.10.1, 7.8.4)
 * cabal
 
 Setup

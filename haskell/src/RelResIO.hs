@@ -4,7 +4,7 @@
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module RelResIO where
-import           Control.Exception (SomeException, catch, catches, throwIO, ErrorCall(ErrorCall), SomeException, displayException, Handler(Handler))
+import           Control.Exception (SomeException, catch, catches, throwIO, ErrorCall(ErrorCall), SomeException, Handler(Handler))
 import qualified Result as R
 import           Result (success, failure)    
 import           RelMonad
@@ -35,7 +35,7 @@ instance RelMonad R.Result IO where
             handleErr (ErrorCall msg) = return (R.Failure msg )
 
             handleSomeEx :: SomeException -> IO (R.Result a)
-            handleSomeEx ex = return (R.Failure (displayException ex))
+            handleSomeEx ex = return (R.Failure (show ex))
 
 newtype IOArb a = MkIOArb { unIOArb :: IO a }
     
