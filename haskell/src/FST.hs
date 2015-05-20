@@ -48,7 +48,10 @@ refMkSetViaFSTCheck fsVia = unsafePerformIO $ do
 -----------------------------------------------------------------------------             
        
 tfs :: (FilePath -> IO (Result a)) -> FST a
-tfs f = ReaderT $ \r -> ResultT (f r)
+tfs = undefined
+
+runFST :: FST a -> FilePath -> IO (Result a)
+runFST = undefined
 
 -- | List files without a nice error message
 tListFiles :: FST [FilePath]
@@ -56,10 +59,7 @@ tListFiles = tfs $ \cwd -> catch (success <$> getDirectoryContents cwd) handleRe
 
 -- | List files with a nicer error message using MonadResult functions.
 tLS :: FST [FilePath]
-tLS = tSetMessage "Invalid path" tListFiles
-
-runFST :: FST a -> FilePath -> IO (Result a)
-runFST a cwd = runResultT $ runReaderT a cwd
+tLS = undefined
 
 -- | Tests for "syntax" functions derived via MonadResult
 --
@@ -79,5 +79,3 @@ runFST a cwd = runResultT $ runReaderT a cwd
 --                              
 -- prop> refMkSetViaFSTCheck (\fsSet -> tBracket (return "init") (\ _ -> tFailure "notok" :: FST String) (\ _ -> fsSet))
 -- prop> refMkSetViaFSTCheck (\fsSet -> tBracket (return "init") (\ _ -> return "ok" :: FST String) (\ _ -> fsSet))
-
-               

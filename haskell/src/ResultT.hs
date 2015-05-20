@@ -14,18 +14,14 @@ instance Applicative f => Applicative (ResultT f) where
   (ResultT f) <*> (ResultT x) = ResultT $ (liftA2 . liftA2) id f x
 
 instance Monad m => Monad (ResultT m) where
-  return = ResultT . return . success
-  ResultT x >>= f = ResultT $ do
-    res <- x
-    result (\r -> runResultT . f $ r) (return . failure) res
-
+  return = undefined
+  (>>=)  = undefined
+  
 instance MonadTrans ResultT where
-  lift = ResultT . liftM success
+  lift = undefined
 
 raiseE :: Monad m => String -> ResultT m a
-raiseE = ResultT . return . failure
+raiseE = undefined
 
 handleE :: Monad m => ResultT m a -> (String -> ResultT m a) -> ResultT m a
-handleE (ResultT x) f = ResultT $ do
-  a <- x
-  result (return . success) (\y -> runResultT (f y)) a
+handleE = undefined

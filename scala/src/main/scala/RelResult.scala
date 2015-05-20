@@ -26,11 +26,9 @@ final class RelResultOps[R[_], A](val self: R[A])(implicit RM: RelMonad[Result, 
   import RelResultSyntax._
   val M = Monad[Result]
 
-  def rMap[B](f: Result[A] => Result[B]): R[B] =
-    RM.rBind(self)(r => M.point(RM.rPoint(f(r))))
+  def rMap[B](f: Result[A] => Result[B]): R[B] = ???
 
-  def rFlatMap[B](f: Result[A] => R[B]): R[B] =
-    RM.rBind(self)(r => M.point(f(r)))
+  def rFlatMap[B](f: Result[A] => R[B]): R[B] = ???
 
   /**
     * Set the error message in a failure case. Useful for providing contextual information without
@@ -38,41 +36,28 @@ final class RelResultOps[R[_], A](val self: R[A])(implicit RM: RelMonad[Result, 
     *
     * NB: This discards any existing message.
     */
-  def rSetMessage(message: String): R[A] =
-    rMap[A](_.setMessage(message))
+  def rSetMessage(message: String): R[A] = ???
 
   /**
     * Adds an additional error message. Useful for adding more context as the error goes up the stack.
     *
     * The new message is prepended to any existing message.
     */
-  def rAddMessage(message: String, separator: String = ": "): R[A] =
-    rMap[A](_.addMessage(message, separator))
+  def rAddMessage(message: String, separator: String = ": "): R[A] = ???
 
   /**
     * Runs the first operation. If it fails, runs the second operation. Useful for chaining optional operations.
     *
     * Returns the error of `self` iff both `self` and `other` fail.
     */
-  def rOr(other: R[A]): R[A] =
-    rFlatMap[A](_.fold(
-      x => RM.rPoint(Result.ok[A](x)),
-      e => other.rMap[A](_.fold(
-        y => Result.ok[A](y),
-        _ => Result.error[A](e)
-      ))
-    ))
+  def rOr(other: R[A]): R[A] = ???
 
   /**
     * Like "finally", but only performs the final action if there was an error.
     *
     * If `action` fails that error is swallowed and only the initial error is returned.
     */
-  def rOnException[B](action: R[B]): R[A] =
-    rFlatMap(r => r.fold(
-      _ => RM.rPoint(r),
-      e => action.rMap(_ => Result.error(e))
-    ))
+  def rOnException[B](action: R[B]): R[A] = ???
 
   /**
     * Ensures that the provided action is always run regardless of if `this` was successful.
@@ -81,21 +66,14 @@ final class RelResultOps[R[_], A](val self: R[A])(implicit RM: RelMonad[Result, 
     * If `self` was successful and `sequel` fails it returns the failure from `sequel`. Otherwise
     * the result of `self` is returned.
     */
-  def rEnsure[B](sequel: R[B])(implicit R: Monad[R]): R[A] = for {
-    r <- rOnException(sequel)
-    _ <- sequel
-  } yield r
-    
+  def rEnsure[B](sequel: R[B])(implicit R: Monad[R]): R[A] = ???
 
   /**
     * Applies the "during" action, calling "after" regardless of whether there was an error.
     *
     * All errors are rethrown. Generalizes try/finally.
     */
-  def rBracket[B, C](after: A => R[B])(during: A => R[C])(implicit R: Monad[R]): R[C] = for {
-    a <- self
-    r <- during(a) rEnsure after(a)
-  } yield r
+  def rBracket[B, C](after: A => R[B])(during: A => R[C])(implicit R: Monad[R]): R[C] = ???
 }
 
 /** Pimps a [[RelResult]] to have access to the functions in [[RelResultOps]].
