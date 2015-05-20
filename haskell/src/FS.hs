@@ -27,34 +27,46 @@ instance Monad FS where
       inner cwd (Success a) = runFS (f a) cwd
       inner _   (Failure s) = return (failure s)
 
-
-setMessage :: String -> FS a -> FS a
-setMessage msg fs = flatMapResult fs (R.setMessage msg)
-
-addMessage :: String -> FS a -> FS a
-addMessage msg fs = flatMapResult fs (R.addMessage msg)
-
-or :: FS a -> FS a -> FS a
-or fs1 fs2 =  FS $ \cdw -> runFS fs1 cdw >>= result (const (runFS fs1 cdw)) (const (runFS fs2 cdw))
-
-bracket :: FS a -> (a -> FS b) -> (a -> FS c) -> FS c
-bracket before after during = do
-  a <- before
-  c <- finally (during a) (after a)
-  return c
-
-finally :: FS a -> FS b -> FS a
-finally a sequel =  FS $ \cwd -> runFS a cwd >>= result (\x -> (runFS sequel cwd) >> return (success x)) (\s -> (runFS sequel cwd) >> return (failure s))
-
-onException :: FS a -> FS b -> FS a
-onException  a sequel =  FS $ \cwd -> runFS a cwd >>= result (return . success) (\s -> (runFS sequel cwd) >> return (failure s))
-
 flatMapResult :: FS a -> (Result a -> Result b) -> FS b
 flatMapResult fs f = FS $ \cdw -> f <$> runFS fs cdw
 
 mapResult :: FS a -> (a -> Result b) -> FS b
 mapResult fs f = flatMapResult fs (>>= f)
 
+-- | Set the error message in a failure case. Useful for providing contextual information without
+-- having to inspect result.
+-- NB: This discards any existing message.
+setMessage :: String -> FS a -> FS a
+setMessage msg fs = flatMapResult fs (R.setMessage msg)
+
+-- | Adds an additional error message. Useful for adding more context as the error goes up the stack.
+-- The new message is prepended to any existing message.
+addMessage :: String -> FS a -> FS a
+addMessage msg fs = flatMapResult fs (R.addMessage msg)
+
+-- | Runs the first operation. If it fails, runs the second operation. Useful for chaining optional operations.
+-- Returns the error of `self` iff both `self` and `other` fail.
+or :: FS a -> FS a -> FS a
+or fs1 fs2 =  FS $ \cdw -> runFS fs1 cdw >>= result (const (runFS fs1 cdw)) (const (runFS fs2 cdw))
+
+-- | Like "finally", but only performs the final action if there was an error.
+-- If `action` fails that error is swallowed and only the initial error is returned.
+onException :: FS a -> FS b -> FS a
+onException  a sequel =  FS $ \cwd -> runFS a cwd >>= result (return . success) (\s -> (runFS sequel cwd) >> return (failure s))
+
+-- | Ensures that the provided action is always run regardless of if `this` was successful.
+-- If `self` was successful and `sequel` fails it returns the failure from `sequel`. Otherwise
+-- the result of `self` is returned.
+finally :: FS a -> FS b -> FS a
+finally a sequel =  FS $ \cwd -> runFS a cwd >>= result (\x -> (runFS sequel cwd) >> return (success x)) (\s -> (runFS sequel cwd) >> return (failure s))
+  
+-- | Applies the "during" action, calling "after" regardless of whether there was an error.
+-- All errors are rethrown. Generalizes try/finally.
+bracket :: FS a -> (a -> FS b) -> (a -> FS c) -> FS c
+bracket before after during = do
+  a <- before
+  c <- finally (during a) (after a)
+  return c
 
 listFiles :: FS [FilePath]
 listFiles = FS $ \cwd -> catch (success <$> getDirectoryContents cwd) handleResult
