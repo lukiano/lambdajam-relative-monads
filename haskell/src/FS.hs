@@ -12,8 +12,7 @@ import           RelMonad
 import           RelResult
 
 import           System.IO.Unsafe
-import
-    Data.IORef
+import           Data.IORef
 
 
 -- $setup

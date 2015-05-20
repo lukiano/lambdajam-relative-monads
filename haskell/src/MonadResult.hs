@@ -49,3 +49,5 @@ tBracket before after during = do
   c <- tFinally (during a) (after a)
   return c
 
+tFailure :: MonadResult m => String -> m a         
+tFailure = raiseError
