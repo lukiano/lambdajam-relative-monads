@@ -103,6 +103,9 @@ object FS extends ToRelResultOps {
     def bind[A, B](a: FS[A])(f: A => FS[B]) = a.flatMap(f)
   }
 
+
+  /************** Relative Monad instance for FS relative to Result *************/
+
   implicit val relMonad: RelMonad[Result, FS] = new RelMonad[Result, FS] {
     /** Similar to a `Monad.point` but expects a `Result`. */
     def rPoint[A](v: => Result[A]): FS[A] = FS(_ => v)

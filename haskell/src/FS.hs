@@ -27,6 +27,9 @@ instance Monad FS where
       inner cwd (Success a) = runFS (f a) cwd
       inner _   (Failure s) = return (failure s)
 
+
+--------------FS Error handling functions---------------------------------------
+
 flatMapResult :: FS a -> (Result a -> Result b) -> FS b
 flatMapResult fs f = FS $ \cdw -> f <$> runFS fs cdw
 
@@ -68,6 +71,9 @@ bracket before after during = do
   c <- finally (during a) (after a)
   return c
 
+
+--------------------------------------------------------------------------------
+
 -- | List files without a nice error message
 listFiles :: FS [FilePath]
 listFiles = FS $ \cwd -> catch (success <$> getDirectoryContents cwd) handleResult
@@ -78,6 +84,10 @@ handleResult _ = return (failure "failed")
 -- | List files with a nicer error message
 ls :: FS [FilePath]
 ls = setMessage "Invalid path" listFiles
+
+
+
+---------------Relative monad instance for FS relative to Result----------------
 
 instance RelMonad Result FS where
   retRel r = FS (const.return $ r)
