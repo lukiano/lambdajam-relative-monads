@@ -10,13 +10,10 @@ import MonadResult
 tMap :: MonadResult m => (Result a -> Result b) -> m a -> m b
 tMap = undefined
 
-rAsk :: RelMonad (Reader a) r => r a
-rAsk = retRel (ask :: Reader a a)
+-- Uncomment once you have defined RelMonad
+--rAsk :: RelMonad (Reader a) r => r a
+--rAsk = undefined
 
-rLocal :: RelMonad (Reader a) r => (a -> a) -> r b -> r b 
-rLocal f = rMap (l f)
-  where
-    l :: (a -> a) -> Reader a b -> Reader a b
-    l g = local g
-    
-
+-- Uncomment once you have defined RelMonad
+--rLocal :: RelMonad (Reader a) r => (a -> a) -> r b -> r b 
+--rLocal = undefined
