@@ -157,7 +157,7 @@ instance RelMonad Result FS where
 -- prop> rSetMessage "error" (return "other")   == (return "other" :: FS String)
 --       
 -- prop> rAddMessage "error" (rFailure "other") == (rFailure "errorother" :: FS String)
--- prop> rAddMessage "error" (return "other")   == (return "other")
+-- prop> rAddMessage "error" (return "other")   == (return "other" :: FS String)
 --
 -- prop> (rFailure "error") `rOr` (return "other")   == (return "other" :: FS String)
 -- prop> (return "can") `rOr` (return "other")       == (return "can" :: FS String)
