@@ -3,7 +3,7 @@ Using Relative Monads for Cheap Syntax
 
 Welcome to the YOW LambdaJam workshop on Relative monads.
 
-In this workshop we will work through a simple use case for relative monads and contrast it with
+In this workshop we will work through a simple use case for relative monads and compare and constrast it with
 different approaches. We will implement error handling on top of a very simple file system library.
 We will first implement error handling specific to the file system library, then generalise the
 error handling code using relative monads and, finally, do the same thing using mtl. For those with
@@ -61,14 +61,14 @@ Extension exercises
 
 Extension exercises can be found in `src/Extension.hs`
 
-* Can you derive a monad for `R` relative to a monad `M`? What about `MonadPlus`?
+* Can you implement a monad instance for `R` assuming a relative monad instance relative to `M` and the monad instance for`M`? What about a the same for `MonadPlus`?  What about the identity monad?
+* Can you implement a general composition of two relative monad instances, the first `R` to `M` and the second `M` and `N`, to directly relate `R` to `N`? 
 * Can you create an instance of _relative monad_ for `IO` relative to `Result`?
 * Can you implement `tMap`?
 * Implement `rAsk` and `rLocal`
 * Can you create an instance of a _relative monad_ for `FS` relative to `Reader FilePath`?
 * Can you turn `RelMonad` into another of the `mtl` patterns such as `MonadError`, `MonadReader`, etc
-  and use it the same way?
-
+  and use it the same way?  What about patterns using other packages? (E.g. `mmorph`, `layers`.)
 
 
 Scala
@@ -117,10 +117,11 @@ Extension exercises
 
 Extension exercises can be found in `src/main/scala/Extension.scala`
 
-* Can you derive a monad for `R` relative to a monad `M`? What about `MonadPlus`.
+* Can you implement a monad instance for `R` assuming a relative monad instance relative to `M` and the monad instance for`M`? What about a the same for `MonadPlus`?  What about the identity monad?
+* Can you implement a general composition of two relative monad instances, the first `R` to `M` and the second `M` and `N`, to directly relate `R` to `N`?
 * Can you create an instance of _relative monad_ for `Future` relative to `Result`?
 * Can you implement `tMap`?
 * Implement `rAsk` and `rLocal`
 * Can you create an instance of a _relative monad_ for `FS` relative to `Reader FilePath`?
 * Can you turn `RelMonad` into another of the `mtl` patterns such as `MonadError`, `MonadReader`, etc
-  and use it the same way?
+  and use it the same way?  What about patterns using other packages?
