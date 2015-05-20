@@ -1,3 +1,4 @@
+{-# LANGUAGE MultiParamTypeClasses, FlexibleContexts, TypeSynonymInstances, FlexibleInstances, ScopedTypeVariables #-}
 module FS where
 import           System.Directory
 import           Control.Exception (SomeException, catch)
@@ -8,7 +9,12 @@ import qualified Result as R
 import           RelMonad
 import           RelResult
 
-data FS a = FS { runFS :: FilePath -> IO (Result a) }
+-- Slight hack, a newtype would be better.    
+instance Show (a -> IO b) where
+    show x = "<Hidden-FunIO-Arg>"
+    
+data FS a = FS { runFS :: FilePath -> IO (Result a) } deriving Show
+          
 
 instance Functor FS where
   fmap = liftM
@@ -39,6 +45,7 @@ mapResult f fs = FS $ \cwd -> f <$> (runFS fs cwd)
 -- --                   assert
 
 -- $setup
+-- >>> :set -XFlexibleContexts -XScopedTypeVariables
 -- >>> import Test.QuickCheck
 -- >>> import Test.QuickCheck.Monadic
 
@@ -109,3 +116,31 @@ instance RelMonad Result FS where
 -- | List files with a nicer error message using RelResult functions.
 rLS :: FS [FilePath]
 rLS = rSetMessage "Hello World" listFiles
+-- >>> relLS
+-- 
+-- Testing the three monad laws
+--     xStill needs to adapt monadicIO from QuickCheck.Monadic
+
+--
+-- prop> \(arb1::R.Result String) (arb2::FS String) -> monadicIO $ rMonIdRProp arb1 (unIOArb arb2)
+
+-- 
+-- prop> \(arb1::R.Result String) (arb2::R.Result String -> FS String) -> monadicIO $ rMonIdLProp arb1 ((unIOArb . arb2))
+
+-- 
+-- prop> \(arb1::IOArb String) (arb2::R.Result String -> FS String) (arb3::R.Result String -> FS String) -> monadicIO $ rMonAssocProp (unIOArb arb1) (unIOArb . arb2) (return . unIOArb . arb3)
+        
+
+-- Testing the three monad laws
+--     xStill needs to adapt monadicIO from QuickCheck.Monadic
+
+--
+-- prop> \(arb1::R.Result String) (arb2::FS String) -> monadicIO $ rMonIdRProp arb1 (unIOArb arb2)
+
+-- 
+-- prop> \(arb1::R.Result String) (arb2::R.Result String -> FS String) -> monadicIO $ rMonIdLProp arb1 ((unIOArb . arb2))
+
+-- 
+-- prop> \(arb1::IOArb String) (arb2::R.Result String -> FS String) (arb3::R.Result String -> FS String) -> monadicIO $ rMonAssocProp (unIOArb arb1) (unIOArb . arb2) (return . unIOArb . arb3)
+
+

@@ -33,6 +33,7 @@ library
     , mtl          >= 2.1
     , QuickCheck   >= 2.0
     , transformers >= 0.3
+    
 
   ghc-options:
     -Wall

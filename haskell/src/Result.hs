@@ -1,12 +1,18 @@
+
 module Result where
 import Control.Applicative
 import Control.Monad (liftM, ap)
 import Control.Monad.Trans
+import Test.QuickCheck.Arbitrary    
+import Test.QuickCheck.Gen
+import GHC.Generics
+    
+-- import Test.ClassLaws
 
 ----------------------------------------------------------------------------------------------------
 data Result a = Success a
               | Failure String
-                deriving (Show, Eq)
+                deriving (Show, Eq, Generic)
 
 instance Functor Result where
   fmap = liftM
@@ -23,6 +29,12 @@ instance Monad Result where
 -- $setup
 -- import Test.QuickCheck
 
+instance Arbitrary a => Arbitrary (Result a) where 
+    arbitrary = frequency [(1, fmap Failure arbitrary), (4, fmap Success arbitrary)]          
+
+instance CoArbitrary a => CoArbitrary (Result a)
+    
+    
 -- | Creates a successful result
 --
 -- prop> success a == Success a
@@ -48,8 +60,8 @@ setMessage msg = result success (const (failure msg))
 
 -- | Set error message
 --
--- >>> addMessage "error" (failure "other")
--- Failure "errorother"
+-- >>> addMessage "error " (failure "other")
+-- Failure "error other"
 addMessage :: String -> Result a -> Result a
 addMessage msg = result success (failure . (msg ++))
 
