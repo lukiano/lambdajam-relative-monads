@@ -2,8 +2,8 @@ name:          lambdajam-workshop
 version:       0.1.0.0
 license:       AllRightsReserved
 author:        Stephan Hoermann
-maintainer:    stephan.hoermann@cba.com.au
-category:      Stats
+author:        Rowan Davies
+category:      Workshop
 build-type:    Custom
 cabal-version: >=1.10
 
