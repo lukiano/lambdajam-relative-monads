@@ -65,7 +65,7 @@ addMessage :: String -> Result a -> Result a
 addMessage msg = result success (failure . (msg ++))
 
 or :: Result a -> Result a -> Result a
-or r1 r2 = result (const r1) (const r2) r2
+or r1 r2 = result (const r1) (const r2) r1
 
 getOrElse :: a -> Result a -> a
 getOrElse alt r = result id (const alt) r
