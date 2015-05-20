@@ -18,14 +18,14 @@ Haskell
 Prerequisite
 ------------
 
-* GHC (tested on 7.8.4 and 7.10)
+* GHC (tested on 7.10.1)
 * cabal
 
 Setup
 -----
 
 1. Go to the haskell subfolder
-2. Run `setup.sh`
+2. Run `cabal sandbox init`, `cabal install --dependencies-only`, `cabal configure --enable-tests`, `cabal build`.
 3. Run `cabal repl` to enter ghci.
 4. Use `:r` to reload and check your changes.
 5. To run the tests run `cabal test`.
