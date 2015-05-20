@@ -29,6 +29,23 @@ instance Eq a => Eq (ResultT IO a) where
 
 instance Show a => Show (FST a) where
     show x = "<NothingToSeeHere>"
+
+fstIOSuccess :: IO a -> FST a
+fstIOSuccess io = ReaderT (\_ -> ResultT (io >>= return . success))
+
+fstToIO :: FST a -> IO (Result a)                  
+fstToIO f = (runFST f undefined)
+             
+-- | Test IO effects by creating an IORef, along with an FS that sets it, and a check.
+refMkSetViaFSTCheck :: (FST () -> FST a) -> Bool                
+refMkSetViaFSTCheck fsVia = unsafePerformIO $ do
+                       r <- newIORef "oops"
+                       resFS <- fstToIO $ fsVia (fstIOSuccess(writeIORef r "did-it"))
+                       rStr <- readIORef r
+                       return (rStr == "did-it")              
+
+
+-----------------------------------------------------------------------------             
        
 tfs :: (FilePath -> IO (Result a)) -> FST a
 tfs f = ReaderT $ \r -> ResultT (f r)
@@ -52,15 +69,15 @@ runFST a cwd = runResultT $ runReaderT a cwd
 -- prop> tAddMessage "error" (tFailure "other") == (tFailure "errorother" :: FST String)
 -- prop> tAddMessage "error" (return "other")   == (return "other" :: FST String)
 --
--- -- >>> refMkSetViaFSTCheck (\fsSet -> (tFailure "cleanup!") `tOnException` fsSet :: FST String)
+-- prop> refMkSetViaFSTCheck (\fsSet -> (tFailure "cleanup!") `tOnException` fsSet :: FST String)
 -- prop> (tFailure "cleanup!") `tOnException` (return "not") == (tFailure "cleanup!" :: FST String)
 --
--- -- >>> refMkSetViaFSTCheck (\fsSet -> (tFailure "notok") `tFinally` fsSet :: FST String)
--- -- >>> refMkSetViaFSTCheck (\fsSet -> (return "ok") `tFinally` fsSet  :: FST String)
+-- prop> refMkSetViaFSTCheck (\fsSet -> (tFailure "notok") `tFinally` fsSet :: FST String)
+-- prop> refMkSetViaFSTCheck (\fsSet -> (return "ok") `tFinally` fsSet  :: FST String)
 -- prop> (tFailure "notok") `tFinally` (return "justdoit") == (tFailure "notok" :: FST String)
 -- prop> (return "ok") `tFinally` (return "justdoit")      == (return "ok" :: FST String)
 --                              
--- -- >>> refMkSetViaFSTCheck (\fsSet -> tBracket (return "init") (\ _ -> tFailure "notok" :: FST String) (\ _ -> fsSet))
--- -- >>> refMkSetViaFSTCheck (\fsSet -> tBracket (return "init") (\ _ -> return "ok" :: FST String) (\ _ -> fsSet))
+-- prop> refMkSetViaFSTCheck (\fsSet -> tBracket (return "init") (\ _ -> tFailure "notok" :: FST String) (\ _ -> fsSet))
+-- prop> refMkSetViaFSTCheck (\fsSet -> tBracket (return "init") (\ _ -> return "ok" :: FST String) (\ _ -> fsSet))
 
                

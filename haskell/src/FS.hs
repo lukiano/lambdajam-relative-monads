@@ -53,6 +53,7 @@ fsFailure msg = FS (\ _ -> return (Failure msg))
 fsIOSuccess :: IO a -> FS a
 fsIOSuccess io = FS (\ _ -> io >>= return . Success)
 
+fsToIO :: FS a -> IO (Result a)                  
 fsToIO (FS f) = f testPath
 
 -- | Test IO effects by creating an IORef, along with an FS that sets it, and a check.
