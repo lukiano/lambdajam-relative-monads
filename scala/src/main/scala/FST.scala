@@ -28,8 +28,12 @@ object FST extends KleisliFunctions {
   def listFiles: FST[List[String]] = apply(f => Result.safeNull(f.list).map(_.toList))
 
   /** List files but with a nice error message using MonadResult functions. */
-  def ls: FST[List[String]] = ???
+  def ls: FST[List[String]] = listFiles.tSetMessage("Nice message")
 
   implicit def FSTMonadResultOps[A](v: FST[A]): MonadResultOps[FST, A] =
     new MonadResultOps[FST, A](v)
+
+  implicit class FSTOps[A](val f: FST[A]) extends AnyVal {
+    def toFS: FS[A] = FS(f)
+  }
 }
